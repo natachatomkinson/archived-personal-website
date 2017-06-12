@@ -1,0 +1,74 @@
+---
+layout: post
+title: The missing widget
+date: 2016-02-14 18:51:34.000000000 +00:00
+type: post
+published: true
+status: publish
+categories:
+- bitsbobsofcodes
+tags: []
+meta:
+  _edit_last: '1'
+  _wpas_done_all: '1'
+author:
+    email: natseg@gmail.com
+    display_name: natseg
+---
+<p>There I was, scratching my head, trying to figure out what to add as a widget to the dreaded footer.<br />
+The footer ie. a no-man's land where no human has ever <del datetime="2016-02-14T18:00:07+00:00">set</del> scrolled to.<br />
+As per the usual, I turned to my best tech mate aka the Big G. aka Google and there I found some light.<br />
+Goodreads offer a nice widget to display your current reading. Fine. 1 down. 2 to go.</p>
+<p>Because I am <em>slightly</em> obsessed with <a href="http://natachasegala.co.uk/?p=3" target="_blank">learning natural languages</a> as well as programming, I thought, heck, let's add a duolingo widget.<br />
+Except - except there is not one. At least, none that I could find on PAGE 1 of my google searches (anything beyond is known as the big un-relevant unknown).</p>
+<p>I found <a href="https://github.com/KartikTalwar/Duolingo" target="_blank">this bit of duolingo-related python on github</a>.<br />
+And I proceeded to create an app:<br />
+1. First got the json from https://www.duolingo.com/users/<br />
+2. Accessed the response body thanks to the <a href="https://github.com/jnunemaker/httparty" target="_blank">lovely httparty gem</a><br />
+3. Once, I had my hash, navigated to the key I was interested in (because the response contains A LOT more than what I needed)<br />
+4. From there, got an array which contained hashes that contained the relevant info - phew, breathe.<br />
+5. Looped through array and selected hash where learning was set to true<br />
+6. Sorted array based on hash with higher value for 'Level'</p>
+<p>I have learned in the process a bit more about iframes than I used to.<br />
+I have also learned that by default, Rails do not allow for iframes.<br />
+More info <a href="http://edgeguides.rubyonrails.org/security.html#default-headers" target="_blank">here</a> and <a href="http://stackoverflow.com/questions/16561066/ruby-on-rails-4-app-not-works-in-iframe" target="_blank">there</a>.<br />
+I wanted some cross-domain to happen.<br />
+Since this app is a show only without any kind of security involved, I figured it would not hurt to change the default headers to 'ALLOWALL'. Which I did.</p>
+<p>Before creating the app, I created the method, to make sure I could do what I wanted with the response.<br />
+I started yesterday and you can see what kind of time I spent based on my commits.<br />
+I am a bit ashamed to say I struggled to...play with the nested-ry of the whole response more than with the logic to apply- if that makes any kind of sense.</p>
+<pre lang="LANGUAGE" line="10">
+  def duolingo
+#so this sets variables to be used in the scope (ie. context/frame) of the class (called Widget - all praise my creativity)
+#the params[:something] is useful to get parameters from the user's browser when they request the page
+#(e.g. "http://www.mysite.com/something="whattheuserwantstoget")
+  @username = params[:username]
+#this below also set a class variable which calls the method init and stores its result
+  @content = WidgetController.init(username)
+  end
+
+#the thing that makes it work
+   def self.init(username="")
+#if no username is passed in the url, I don't want my app to break so I am making sure something is passed
+   		if !username.nil?
+#Please httparty get me the info I need from duolingo based on the username passed in url
+        response = HTTParty.get('https://www.duolingo.com/users/' + username)
+#Parse the body to Json (meaning I also include the json gem in my gemfile)
+        json = JSON.parse(response.body)
+#get me the value for 'languages' key
+        hash = json["languages"]
+#I know it's an array full of hashes (how sick is that?) so loop through the array
+        hash = hash.each do |x|
+#destructively select any key value pair which key includes
+#streak, language_string,points,level, to_next_level, learning ONLY IF value for learning is true
+                x.select!{|k,v| k =~ /streak|language_string|points|level|to_next_level|learning/ && x["learning"]}
+            end
+#now now some cleanup, reject any empty hash left from select and sort this array by level descending, ta very much
+        hash = hash.reject { |c| c.empty? }.sort_by { |hsh| hsh["level"] }.reverse!
+   		end
+       end
+#the end!
+</pre>
+<p>I wrapped that engine (controller) in a pretty (scss) box (view) and that's it.<br />
+I am able (check the footer, tadam!) to embed the generated/formatted/styled html via an iframe tag.<br />
+It was either that or learning PHP in less than 6h. Errr.</p>

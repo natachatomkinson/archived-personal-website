@@ -1,0 +1,87 @@
+---
+layout: post
+title: Let's get d...orky
+date: 2016-03-15 13:24:34.000000000 +00:00
+type: post
+published: true
+status: publish
+categories:
+- hardware
+tags:
+- asus
+- asusux305
+- bios
+- boot
+- distribution
+- fedora23
+- linux
+meta:
+  _edit_last: '1'
+  _wpas_done_all: '1'
+author:
+  email: natseg@gmail.com
+  display_name: natseg
+---
+<p>Today, I will publish details about my personal life.</p>
+<p>When my desktop computer sadly passed away June last year, I decided to make the big jump.<br />
+Jump into the land of laptop gamers that is.<br />
+I had never felt the need or wish to before.<br />
+Always thought a desktop left you with the choice to easily upgrade whenever the need arose.<br />
+Except, I <del datetime="2016-02-25T22:27:26+00:00">rarely</del> never got around doing it. Moving to a tiny doubleroom in Central London also made me realize the benefits of owning a laptop.</p>
+<p>I use my computer for various purposes - including gaming which did put a minimum configuration and thus price tag on my buy:<br />
+MSI GT72 2QE (Dominator Pro)-682UK<br />
+Intel® Core™ i7-4720HQ Quad Core Processor<br />
+17.3" Full HD Screen, Microsoft Windows 8.1 64-bit, 16GB DDR3 RAM, 128GB SSD + 1000GB HDD, DVD Rewriter, Dedicated GeForce GTX 980M 4GB Graphics, USB3 | HDMI | Bluetooth | DisplayPort, 2 Year MSI Warranty, 9S7-178131-682</p>
+<p>I weighed the best value and my focus was mainly - along with a nice graphic card and processor - on getting as much SSD and RAM as possible. Just before it hits the mark where it becomes incredibly costly.</p>
+<p>Now, I quickly realized that this 7kg beast of a 'laptop' really is a desktop replacement. As in your laps need to be a desk to feel comfortable about cuddling it.</p>
+<p>Coding on the go was thus a big no no. Trust me, being stubborn, I tried.</p>
+<p>Months later, I also sized down my phablet to a more normal phone.<br />
+All this led me to welcoming a new device into the family (of devices).</p>
+<p>After discussing hardware with work colleagues, my heart - heavily guided by my brain - turned to this alternative to a MacBook Air (cheaper):<br />
+ASUS Zenbook UX305 13.3" Laptop - White<br />
+<img class="alignnone size-medium wp-image-95" src="{{ site.baseurl }}/assets/computer-300x266.jpg" alt="ASUS Zenbook UX305 13.3" width="300" height="266" /></p>
+<p>Here are its specifications:<br />
+Processor: Dual-Core Intel Core M-5Y10c,<br />
+RAM: 8GB, Size: 324x226x12mm,<br />
+Weight: 1.2kg,<br />
+Screen size: 13.3 inches,<br />
+Screen resolution: 1,920x1,080<br />
+Graphics adaptor: Intel HD 5300<br />
+Total storage: 128GB SSD</p>
+<p>It's quick, light, sleek.<br />
+The screen resolution could be better - it is in fact better on later models (3200 x 1800, processor has been upgraded too).<br />
+Quality was enough for my needs.</p>
+<p>Then I thought, 'hold on, I don't want another Windows and I could do with some experience fiddling with a Linux distribution'.<br />
+Yes, for the record, I think like that. S<br />
+omeone said the magic word! DUALBOOT - when you can choose to boot on Windows or Linux.<br />
+I knew what it meant, just never had used it or set it up.<br />
+New==shiny so I tried.</p>
+<p>After that I had to make a choice, between the linux distros out there.<br />
+After discussing the matter with my privy council, I knew I had to choose between Debian and Fedora.<br />
+I went for Fedora (23). My main reasons:<br />
+- they are early adopters<br />
+- my affinity with software/frameworks used by Fedora backer</p>
+<p>I had to get my hands dirty and just move on to install.<br />
+I generally prefer formatting my devices to avoid any unnecessary issue.<br />
+I wiped my usb drive clean and followed the guide below:<br />
+<a href="https://fedoraproject.org/wiki/How_to_create_and_use_Live_USB#Windows_quick_start_.28direct_write.29">Windows quick start (direct write)</a></p>
+<blockquote><p>This method will destroy all data on the USB stick.<br />
+Download a Fedora image, choose a USB stick that does not contain any data you need, and connect it.<br />
+Download and run Rawrite32.<br />
+Choose the Fedora image as the Filesystem image (Rawrite32) - if the image file is not shown, you may have to change the file selector options or change the image's extension.<br />
+Choose the USB stick in the drop-down box as the Target (Rawrite32).<br />
+Double-check you're really, really sure you don't need any of the data on the USB stick!<br />
+Click Write to disk... (Rawrite32).<br />
+Wait for the operation to complete, then reboot your computer.<br />
+Do whatever you need to do to boot from a USB stick - often this will involve pressing or holding down F12, F2 or Del.</p></blockquote>
+<p>On the ASUS Zenbook UX305 here is what you have to do:<br />
+- restart computer<br />
+- press escape key quickly as computer restarts<br />
+- navigate to Security Tab:<br />
+<img src="{{ site.baseurl }}/assets/bios_disable_security-300x178.jpg" alt="bios_disable_security" width="300" height="178" class="alignnone size-medium wp-image-98" /><br />
+- then to Secure Boot Menu:<br />
+<img src="{{ site.baseurl }}/assets/bios_disable_security_2-300x169.jpg" alt="bios_disable_security_2" width="300" height="169" class="alignnone size-medium wp-image-97" /><br />
+Disable this control to enable booting via your usb key.<br />
+This setting is supposed to help protect against rootkits and other malware infecting the boot loader.</p>
+<p>Once the comp boots on the usb where the image has been written, it's a matter of following fedora's instructions and clicking 'Next'.</p>
+<p>Tadam!</p>

@@ -1,0 +1,9 @@
+{
+  "name": "natseg",
+  "version": "1.0.0",
+  "description": "Natacha Segala's personal website",
+  "main": "index.js",
+  "repository": "https://github.com/natseg/natseg",
+  "author": "Natacha Ségala",
+  "license": "MIT"
+}

@@ -1,0 +1,24 @@
+@import './styles/theme.less';
+
+.container {
+
+  .cardContainer {
+    margin: 24px;
+
+    display: flex;
+    justify-content: space-between;
+
+    .card {
+      width: 45%
+    }
+
+    @media(max-width: @medium_screen_max_width) {
+      display: block;
+
+      .card {
+        width: 100%;
+      }
+    }
+  }
+
+}

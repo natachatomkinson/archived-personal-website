@@ -1,0 +1,16 @@
+a.unstyledLink {
+  text-decoration: none;
+  &:visited {
+    color: inherit;
+  }
+
+  color: inherit;
+}
+
+@small_screen_max_width: 400px;
+@medium_screen_min_width: @small_screen_max_width+1;
+@medium_screen_max_width: 600px;
+@large_screen_min_width: @medium_screen_max_width+1;
+@large_screen_max_width: 800px;
+@xl_screen_min_width: @large_screen_max_width+1;
+@xl_screen_max_width: 1000px;

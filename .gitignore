@@ -6,3 +6,4 @@ node_modules
 .idea
 public
 *.entry.js
+_site

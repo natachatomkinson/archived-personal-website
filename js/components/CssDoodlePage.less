@@ -10,16 +10,17 @@
   }
 }
 
-.doodleContainer {
+.firstDoodleContainer {
   position: relative;
   margin: 24px;
   padding: 12px;
+  min-height: 200px;
 }
 
 .lightSabreContainer {
   position: absolute;
   top: 0;
-  left: 61px;
+  left: 45px;
   transform-origin: bottom;
   animation: sway 1s infinite alternate 5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
@@ -47,7 +48,7 @@
   width: 5px;
   border-radius: 2px;
   border-color: transparent;
-  background-image: radial-gradient(ellipse at center, white 0, #00ee00 90%);
+  background-image: radial-gradient(ellipse at center, white 0, #00ee00 10%);
   filter: blur(2px);
   animation: appear 2s 1 forwards 3s;
 }
@@ -59,23 +60,25 @@
   height: 100px;
   border-radius: 50px;
   background-color: @twilek-color;
+  left: -15px;
 
   &:before,
   &:after {
     position: absolute;
     content: '';
-    top: 9px;
-    height: 46px;
-    width: 28px;
-    background-color: @twilek-color;
+    top: 10px;
+    height: 68px;
+    width: 34px;
+    background-color: overlay(@twilek-color, darken(@twilek-color, 5%));
+    border: 2px solid overlay(@twilek-color, darken(@twilek-color, 5%));
   }
 
   &:before {
-    left: -8px;
+    left: -15px;
     border-radius: 100% 0 100% 100%;
   }
   &:after {
-    right: -8px;
+    right: -15px;
     border-radius: 0 100% 100% 100%
   }
 }
@@ -84,22 +87,57 @@
   position: absolute;
   width: 0;
   height: 0;
-  top: 70px;
-  border-top: 70px solid @twilek-color;
+  top: 50px;
+  border-top: 115px solid darken(@twilek-color, 5%);
+  border-radius: 100%;
+  z-index: -2000;
 }
 
 .hairLeft {
-  left: -20px;
-  border-left: 20px solid transparent;
-  border-right: 35px solid transparent;
-  transform: rotate(40deg);
+  left: -40px;
+  border-left: 23px solid transparent;
+  border-right: 29px solid transparent;
+  transform: rotate(22deg);
+  animation: skewLeft 800ms infinite 4.5s cubic-bezier(0.86, 0, 0.07, 1);
+
+
+  &:before {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    top: -60px;
+    border-top: 180px solid darken(@twilek-color, 5%);
+    border-radius: 100%;
+    left: 10px;
+    border-left: 28px solid transparent;
+    border-right: 28px solid transparent;
+    transform: rotate(-35deg);
+    animation: wriggleLeft 800ms infinite 4.5s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  }
 }
 
 .hairRight {
-  right: -20px;
-  border-right: 20px solid transparent;
-  border-left: 35px solid transparent;
-  transform: rotate(-40deg);
+  right: -9px;
+  border-right: 23px solid transparent;
+  border-left: 29px solid transparent;
+  transform: rotate(-22deg);
+  animation: skewRight 800ms infinite 4.5s cubic-bezier(0.86, 0, 0.07, 1);
+
+  &:before {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    top: -60px;
+    border-top: 180px solid darken(@twilek-color, 5%);
+    border-radius: 100%;
+    right: 10px;
+    border-left: 28px solid transparent;
+    border-right: 28px solid transparent;
+    transform: rotate(35deg);
+    animation: wriggleRight 800ms infinite 4.5s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  }
 }
 
 .leftEye, .rightEye {
@@ -151,4 +189,20 @@
 @keyframes appear {
   from { max-height: 0; margin-top: 150px; }
   to { max-height: 150px; margin-top: 0; }
+}
+
+@keyframes skewLeft {
+  to { transform: skewX(-20deg); left: -42px }
+}
+
+@keyframes skewRight {
+  to { transform: skewX(20deg); right: -11px }
+}
+
+@keyframes wriggleLeft {
+  to { transform: skewX(32deg); top: -50px; left: 12px }
+}
+
+@keyframes wriggleRight {
+  to { transform: skewX(-32deg); top: -50px; right: 12px  }
 }

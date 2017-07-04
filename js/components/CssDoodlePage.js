@@ -12,7 +12,7 @@ class CssDoodlePage extends Component {
 
         <div className={ style.container }>
 
-          <div className={ style.doodleContainer } >
+          <div className={ style.firstDoodleContainer } >
             <figure className={ style.face } >
               <figure className={ style.leftEye } />
               <figure className={ style.rightEye } />

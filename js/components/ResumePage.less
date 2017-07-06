@@ -1,0 +1,39 @@
+@import './styles/theme.less';
+
+.header {
+  text-align: center;
+}
+
+.skillContainer {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 24px 0;
+
+ .skill {
+   width: 30%;
+   margin: 1%;
+
+   .skillCircle, .skillSquare {
+     margin: 24px auto;
+     width: 120px;
+     height: 120px;
+     line-height: 120px;
+     text-align: center;
+     text-transform: uppercase;
+   }
+
+   .skillCircle {
+     border-radius: 50%;
+     background-color: @listBackgroundColor;
+   }
+
+   .skillSquare {
+     border-radius: 0;
+     background-color: @dimPrimaryColor;
+     color: @snackBar;
+     font-weight: 600;
+   }
+ }
+}

@@ -168,7 +168,11 @@ export default {
 
   dividerOverride: {
     backgroundColor: primaryColor,
-    height: '2px'
+    height: '2px',
+    maxWidth: '80%',
+    marginTop: '36px',
+    marginLeft: 'auto',
+    marginRight: 'auto'
   },
 
 

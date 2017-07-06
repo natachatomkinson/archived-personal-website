@@ -1,3 +1,70 @@
+@small_screen_max_width: 400px;
+@medium_screen_min_width: @small_screen_max_width+1;
+@medium_screen_max_width: 600px;
+@large_screen_min_width: @medium_screen_max_width+1;
+@large_screen_max_width: 800px;
+@xl_screen_min_width: @large_screen_max_width+1;
+@xl_screen_max_width: 1000px;
+
+
+// Theme
+
+@primaryColor: #0c8985;
+@secondaryColor: #0cbeba;
+@dimPrimaryColor: #017d89;
+@listBackgroundColor: #0fa8a3;
+
+@accentColor: #93f3e8;
+@errorColor: #FF5252;
+
+@paperColor: #085b57;
+
+
+@buttonSecondaryColor: rgba(0,0,0,.75);
+
+@dividerColor: rgba(255, 255, 255, 0.54);
+@dimDividerColor: rgba(255, 255, 255, 0.2);
+
+@snackBar: rgba(65,65,65,1);
+
+@primaryBackgroundColor: rgba(0,0,0,.75);
+@secondaryBackgroundColor: rgba(68,68,68,.9);
+
+// Fonts
+@primaryTextColor: #FFFFFF;
+@secondaryTextColor: rgba(255, 255, 255, 0.9);
+@disabledTextColor: rgba(255, 255, 255, 0.3);
+@buttonTextColor: rgba(255, 255, 255, 0.87);
+
+
+.xlHeader {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 12px;
+
+  @media (max-width: @small_screen_max_width) {
+    font-size: 20px;
+  }
+}
+
+.lHeader {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 12px;
+
+  @media (max-width: @small_screen_max_width) {
+    font-size: 16px;
+  }
+}
+
+.body {
+  font-size: 16px;
+
+  @media (max-width: @small_screen_max_width) {
+    font-size: 14px;
+  }
+}
+
 a.unstyledLink {
   text-decoration: none;
   &:visited {
@@ -6,11 +73,3 @@ a.unstyledLink {
 
   color: inherit;
 }
-
-@small_screen_max_width: 400px;
-@medium_screen_min_width: @small_screen_max_width+1;
-@medium_screen_max_width: 600px;
-@large_screen_min_width: @medium_screen_max_width+1;
-@large_screen_max_width: 800px;
-@xl_screen_min_width: @large_screen_max_width+1;
-@xl_screen_max_width: 1000px;

@@ -8,7 +8,7 @@ import { ListItem } from 'material-ui/List';
 import CONSTANTS from '../Constants';
 import PostsContainer from './PostsContainer';
 
-const { title, baseUrl, about, doodles } = CONSTANTS;
+const { title, baseUrl, about, doodles, resume } = CONSTANTS;
 
 import fontStyle from './styles/theme.less';
 import style from './Navigation.less';
@@ -46,14 +46,22 @@ class Navigation extends Component {
 
         <Drawer open={ isOpenDrawer } docked={ false } onRequestChange={ this.toggleLeftDrawer } >
           <PostsContainer />
-          <a className={ fontStyle.unstyledLink } href={ about }>
-            <ListItem
-              primaryText="ABOUT"
-            />
-          </a>
+
           <a className={ fontStyle.unstyledLink } href={ doodles }>
             <ListItem
               primaryText="CSS DOODLES"
+            />
+          </a>
+
+          <a className={ fontStyle.unstyledLink } href={ resume }>
+            <ListItem
+              primaryText="RESUME"
+            />
+          </a>
+
+          <a className={ fontStyle.unstyledLink } href={ about }>
+            <ListItem
+              primaryText="ABOUT"
             />
           </a>
         </Drawer>

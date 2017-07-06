@@ -7,8 +7,9 @@
   "author": "Natacha Ségala",
   "license": "MIT",
   "scripts": {
-    "serve": "bundle exec jekyll serve --detach && yarn run watch",
-    "watch": "webpack -w"
+    "serve": "bundle exec jekyll serve",
+    "watch": "webpack -w",
+    "deploy": "cd ./public && lftp -c \"open -u $FTP_USER,$FTP_PASSWORD $FTP_HOST; set ssl:verify-certificate no; mirror -R . \/www\/\""
   },
   "dependencies": {
     "autoprefixer-loader": "^3.2.0",

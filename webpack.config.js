@@ -5,7 +5,8 @@ module.exports = {
     homepage: './js/App.js',
     default: './js/Default.js',
     cssDoodlePage: './js/DoodlePage.js',
-    about: './js/AboutPage.js'
+    about: './js/AboutPage.js',
+    resume: './js/Resume.js'
   },
   output: {
     path: path.join(__dirname, "src"),

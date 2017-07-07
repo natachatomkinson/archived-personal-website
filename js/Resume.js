@@ -18,4 +18,4 @@ class Resume extends Component {
     );
   }
 }
-render(<Resume />, document.getElementById('default'));
+render(<Resume />, document.getElementById('root'));

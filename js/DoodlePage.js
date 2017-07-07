@@ -18,4 +18,4 @@ class DoodlePage extends Component {
     );
   }
 }
-render(<DoodlePage />, document.getElementById('default'));
+render(<DoodlePage />, document.getElementById('root'));

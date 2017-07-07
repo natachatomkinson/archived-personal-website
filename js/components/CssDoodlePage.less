@@ -1,4 +1,6 @@
-@twilek-color: #ff4eef;
+@import './styles/theme.less';
+
+@twilek-color: #2666ff;
 
 .container {
   display: flex;
@@ -8,13 +10,21 @@
   figure {
     margin: 0;
   }
-}
 
-.firstDoodleContainer {
-  position: relative;
-  margin: 24px;
-  padding: 12px;
-  min-height: 200px;
+  .firstDoodleContainer {
+    position: relative;
+    margin: 24px;
+    padding: 12px;
+    min-height: 200px;
+  }
+
+  @media (max-width: @small_screen_max_width) {
+    .firstDoodleContainer {
+      margin: 12px;
+      padding: 6px;
+      transform: scale(0.5);
+    }
+  }
 }
 
 .lightSabreContainer {

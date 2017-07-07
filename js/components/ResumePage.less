@@ -1,39 +1,85 @@
 @import './styles/theme.less';
 
+@small_screen_dimensions: 90px;
+@non_small_screen_dimensions: 120px;
+
 .header {
   text-align: center;
 }
 
-.skillContainer {
+.skillContainerCollapsed {
+  @media (min-width: @medium_screen_min_width) {
+    animation: moveup 1s 600ms cubic-bezier(0.86, 0, 0.07, 1) forwards;
+  }
+}
+
+.skillContainer, .skillContainerFrameWork {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
+  width: 100%;
+}
+
+.skillContainer {
+  position: relative;
   margin: 24px 0;
+}
 
- .skill {
-   width: 30%;
-   margin: 1%;
+.skillCircleContainer {
+ width: 30%;
+ margin: 0 1%;
+}
 
-   .skillCircle, .skillSquare {
-     margin: 24px auto;
-     width: 120px;
-     height: 120px;
-     line-height: 120px;
-     text-align: center;
-     text-transform: uppercase;
-   }
+.skillSquareContainer {
+  width: 30%;
 
-   .skillCircle {
-     border-radius: 50%;
-     background-color: @listBackgroundColor;
-   }
+  @media(max-width: @small_screen_max_width) {
+    width: 49%;
+  }
+}
 
-   .skillSquare {
-     border-radius: 0;
-     background-color: @dimPrimaryColor;
-     color: @snackBar;
-     font-weight: 600;
-   }
- }
+.skillCircle, .skillSquare {
+  margin: 24px auto;
+  width: @non_small_screen_dimensions;
+  height: @non_small_screen_dimensions;
+  line-height: @non_small_screen_dimensions;
+  text-align: center;
+  box-shadow: 2px 2px 2px @secondaryBackgroundColor;
+  text-transform: uppercase;
+
+  @media(max-width: @small_screen_max_width) {
+    width: @small_screen_dimensions;
+    height: @small_screen_dimensions;
+    line-height: @small_screen_dimensions;
+  }
+}
+
+.skillCircle {
+  border-radius: 50%;
+  border: 3px lighten(@listBackgroundColor, 1%) solid;
+  background-color: @listBackgroundColor;
+}
+
+.skillSquare {
+  border-radius: 0;
+  border: 3px lighten(@dimPrimaryColor, 1%) solid;
+  background-color: @dimPrimaryColor;
+  color: @snackBar;
+  font-weight: 600;
+}
+
+
+@keyframes moveup {
+  0% {
+    position: absolute;
+    top: @non_small_screen_dimensions;
+    left: 0;
+  }
+
+  100% {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 }

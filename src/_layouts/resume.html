@@ -4,18 +4,13 @@
 {% include head.html %}
 
 <body>
-<div id="default"></div>
+<div id="root"></div>
 
 <div class="page-content">
-    <article class="post">
-        <div class="post-content">
-            {{ content }}
-        </div>
-    </article>
 </div>
 
 {% include footer.html %}
-<script type="text/javascript" src="../resume.entry.js" charset="utf-8"></script>
+<script type="text/javascript" src="{{ site.baseurl }}/resume.entry.js" charset="utf-8"></script>
 </body>
 
 </html>

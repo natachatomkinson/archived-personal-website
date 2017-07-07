@@ -1,10 +1,10 @@
-@small_screen_max_width: 400px;
-@medium_screen_min_width: @small_screen_max_width+1;
-@medium_screen_max_width: 600px;
+@small_screen_max_width: 445px;
+@medium_screen_min_width: 446px;
+@medium_screen_max_width: 645px;
 @large_screen_min_width: @medium_screen_max_width+1;
-@large_screen_max_width: 800px;
+@large_screen_max_width: 845px;
 @xl_screen_min_width: @large_screen_max_width+1;
-@xl_screen_max_width: 1000px;
+@xl_screen_max_width: 1045px;
 
 
 // Theme
@@ -28,7 +28,7 @@
 @snackBar: rgba(65,65,65,1);
 
 @primaryBackgroundColor: rgba(0,0,0,.75);
-@secondaryBackgroundColor: rgba(68,68,68,.9);
+@secondaryBackgroundColor: rgba(68, 68, 68, 0.73);
 
 // Fonts
 @primaryTextColor: #FFFFFF;
@@ -42,7 +42,7 @@
   font-weight: 500;
   margin-bottom: 12px;
 
-  @media (max-width: @small_screen_max_width) {
+  @media(max-width: @small_screen_max_width) {
     font-size: 20px;
   }
 }
@@ -52,7 +52,7 @@
   font-weight: 500;
   margin-bottom: 12px;
 
-  @media (max-width: @small_screen_max_width) {
+  @media(max-width: @small_screen_max_width) {
     font-size: 16px;
   }
 }
@@ -60,7 +60,7 @@
 .body {
   font-size: 16px;
 
-  @media (max-width: @small_screen_max_width) {
+  @media(max-width: @small_screen_max_width) {
     font-size: 14px;
   }
 }

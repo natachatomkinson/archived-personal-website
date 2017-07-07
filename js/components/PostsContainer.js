@@ -6,27 +6,27 @@ import fontStyle from './styles/theme.less';
 
 const POSTS = [
   {   title: 'Hello World',
-    link: 'bitsbobsofcodes/hello-world.html'
+    link: '/bitsbobsofcodes/hello-world/'
   },
   {
     title: 'Duolingo Widget',
-    link: '/bitsbobsofcodes/the-missing-widget.html'
+    link: '/bitsbobsofcodes/the-missing-widget/'
   },
   {
     title: 'Dualboot Fedora/Windows',
-    link: '/hardware/how-to-asus-zenbook-ux305-dualboot-fedora-23.html',
+    link: '/hardware/how-to-asus-zenbook-ux305-dualboot-fedora-23/',
   },
   {
     title: 'Chomsky Generated Headache',
-    link:  '/meta-thinking-beyond/chomsky-generated-headache.html',
+    link:  '/meta-thinking-beyond/chomsky-generated-headache/',
   },
   {
     title: 'Upgrade your own software',
-    link:  '/meta-thinking-beyond/the-platforms-that-changed-my-brain-coding-and-all-that.html',
+    link:  '/meta-thinking-beyond/the-platforms-that-changed-my-brain-coding-and-all-that/',
   },
   {
     title: 'ScotlandJS 2016',
-    link:  '/techietalkie/scotlandjs-2016.html'
+    link:  '/techietalkie/scotlandjs-2016/'
   }
 ];
 

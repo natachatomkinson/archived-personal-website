@@ -44,7 +44,7 @@ module.exports = {
             options: {
               indentedSyntax: true,
               outputStyle: 'expanded',
-              browsers: 'last 2 version'
+              browsers: 'last 2 versions'
             }
           }
         ]

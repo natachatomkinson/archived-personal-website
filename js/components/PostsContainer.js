@@ -43,8 +43,10 @@ class PostContainer extends Component {
 
     return _.compact(_.map(INDEX, ({ href, title })=> {
       if (title) {
+        const link = _.drop(_.split(href, '/'),3).join('/');
+
         return (
-          <a href={ href } className={ fontStyle.unstyledLink }  key={ title } >
+          <a href={ `../${link}` } className={ fontStyle.unstyledLink }  key={ title } >
             <ListItem >
               { _.upperCase(title) }
             </ListItem>

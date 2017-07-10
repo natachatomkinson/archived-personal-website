@@ -9,7 +9,7 @@
   "scripts": {
     "serve": "bundle exec jekyll serve",
     "watch": "webpack -w",
-    "deploy": "cd ./public && lftp -c \"open -u $FTP_USER,$FTP_PASSWORD $FTP_HOST; set ssl:verify-certificate no; mirror -R . \/www\/\""
+    "deploy": "cd ./public && lftp -c \"open -u $FTP_USER,$FTP_PASSWORD $FTP_HOST; set ssl:verify-certificate no; mirror -R . /www/\""
   },
   "dependencies": {
     "autoprefixer-loader": "^3.2.0",
@@ -26,6 +26,7 @@
     "react": "^15.6.1",
     "react-addons-update": "^15.6.0",
     "react-dom": "^15.6.1",
+    "react-swipeable-views": "^0.12.3",
     "react-tap-event-plugin": "^2.0.1",
     "style-loader": "^0.18.2",
     "webpack": "^3.0.0"

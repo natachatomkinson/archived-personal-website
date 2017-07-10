@@ -34,7 +34,7 @@
 @primaryTextColor: #FFFFFF;
 @secondaryTextColor: rgba(255, 255, 255, 0.9);
 @disabledTextColor: rgba(255, 255, 255, 0.3);
-@buttonTextColor: rgba(255, 255, 255, 0.87);
+@tertiaryTextColor: rgba(255, 255, 255, 0.87);
 
 
 .xlHeader {
@@ -57,12 +57,40 @@
   }
 }
 
+.subHeader {
+  font-size: 18px;
+  font-weight: 500;
+
+  @media(max-width: @small_screen_max_width) {
+    font-size: 16px;
+  }
+}
+
 .body {
   font-size: 16px;
 
   @media(max-width: @small_screen_max_width) {
     font-size: 14px;
   }
+}
+
+.caption {
+  font-size: 14px;
+  color: @tertiaryTextColor;
+
+  @media(max-width: @small_screen_max_width) {
+    font-size: 12px;
+  }
+}
+
+.date {
+  font-size: 12px;
+
+  font-style: italic;
+  @media(max-width: @small_screen_max_width) {
+    font-size: 10px;
+  }
+
 }
 
 a.unstyledLink {

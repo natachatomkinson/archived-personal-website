@@ -1,7 +1,13 @@
+@import "./styles/theme.less";
+
 .list {
   list-style: none;
 }
 
 .sentence {
   margin: 24px;
+
+  @media (max-width: @small_screen_max_width) {
+    margin: 12px 0;
+  }
 }

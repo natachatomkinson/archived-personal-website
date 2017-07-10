@@ -4,34 +4,28 @@ import { ListItem } from 'material-ui/List';
 
 import fontStyle from './styles/theme.less';
 
-const POSTS = [
-  {   title: 'Hello World',
-    link: '/bitsbobsofcodes/hello-world/'
-  },
-  {
-    title: 'Duolingo Widget',
-    link: '/bitsbobsofcodes/the-missing-widget/'
-  },
-  {
-    title: 'Dualboot Fedora/Windows',
-    link: '/hardware/how-to-asus-zenbook-ux305-dualboot-fedora-23/',
-  },
-  {
-    title: 'Chomsky Generated Headache',
-    link:  '/meta-thinking-beyond/chomsky-generated-headache/',
-  },
-  {
-    title: 'Upgrade your own software',
-    link:  '/meta-thinking-beyond/the-platforms-that-changed-my-brain-coding-and-all-that/',
-  },
-  {
-    title: 'ScotlandJS 2016',
-    link:  '/techietalkie/scotlandjs-2016/'
-  }
-];
+let INDEX = [];
+
+function fetchPostIndex() {
+  return fetch('/feed.xml', {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  }).then(response => response.text())
+    .then(text => (new window.DOMParser()).parseFromString(text, "text/xml"))
+    .then(data => data.getElementsByTagName("link"))
+    .then(entries => {
+      return _.each(entries, (entry, index)=> {
+        INDEX[index] = {
+          href: entry.getAttribute('href'),
+          title: entry.getAttribute('title'),
+        };
+      })
+    });
+}
 
 class PostContainer extends Component {
-
   render() {
     return (
       <ListItem
@@ -44,10 +38,21 @@ class PostContainer extends Component {
   }
 
   renderPosts() {
-    return _.map(POSTS, ({ link, title })=> {
-      return  <a href={ link } className={ fontStyle.unstyledLink }  key={ title } ><ListItem >{ title }</ListItem></a>;
-    });
-  }
+
+    fetchPostIndex();
+
+    return _.compact(_.map(INDEX, ({ href, title })=> {
+      if (title) {
+        return (
+          <a href={ href } className={ fontStyle.unstyledLink }  key={ title } >
+            <ListItem >
+              { _.upperCase(title) }
+            </ListItem>
+          </a>
+        )
+      }
+    }));
+  };
 }
 
 PostContainer.propTypes = {};

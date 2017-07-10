@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Basic Unix on Mac OS
+title: Basic Unix on MacOS
 date: 2017-07-09
 type: post
 published: true
@@ -12,49 +12,35 @@ tags:
 - bash
 meta:
     _edit_last: '1'
-author:
+    author:
     email: natseg@gmail.com
     display_name: natseg
 ---
 
 Here is a summary of my notes of the book 'Learning Unix for OS X' by Dave Taylor.
 
+A directory is just another kind of file
+
 BASIC COMMANDS
-                                  
+
 {% highlight bash linenos %}
-
-pwd - Print Working Directory
-man - Manual
-less - Long Text File
-grep - pattern filename
-cp - copy
-mv - move
-top - Running Applications and Processes
-ls -l - List files and directories
-open - open file or program with default application
-
+$ <command> -options <filename(s)>s
+$ pwd - Print Working Directory
+$ man - Manual
+$ less - Long Text File
+$ grep - pattern filename
+$ cp - copy
+$ mv - move
+$ top - Running Applications and Processes
+$ ls -l - List files and directories
+$ open - open file or program with default application
 {% endhighlight %}
-
 
 Exception in order of arguments
 
-{% highlight bash %}
+` sort -o 'sortedfilename' -n 'sortmefilename'`
 
-sort -o 'sortedfilename' -n 'sortmefilename'
-
-{% endhighlight %}
-
-Paste escaped text by using ^ + meta + V
-What does meta + shift + v do?
-
----
-
-Applescript:
-osascript -e | somecommand
-
-Applications/Utilities/Script Editor
-
-investigate
+Paste escaped text by using ctrl + meta + V (only in Terminal)
 
 ---
 
@@ -65,31 +51,22 @@ CTRL + S / CTRL + Q = pause/resume printing of a program executing
 
 ---
 
-LOGIN SHELL
-chsh
-
----
-
 ALIASING
 
 ls=/bin/ls -af
 rm= rm - i
-mv = mv -i
-cp = cp -i
+mv= mv -i
+cp= cp -i
 
 -i interactive adds prompt when deleting / overwriting
 
-{% highlight bash linenos %}
-$ alias -' get all aliases
-{% endhighlight %}
+`$ alias -' get all aliases`
 
 ---
 
 LIST INFORMATION
 
-{% highlight bash linenos %}
-$ ls
-{% endhighlight %}
+`$ ls`
 
 -C sorted down
 -x sorted across
@@ -103,7 +80,10 @@ $ ls
 
 PERMISSIONS
 
+{% highlight bash %}
 d             | rwx                             | r - x | ---
+{% endhighlight %}
+
 directory | Read Write eXecute  | read nowrite execute | nothing allowed
 owner's permissions    group permissions     | other users
 
@@ -114,9 +94,7 @@ plain file  | ...
 
 CHANGING
 
-{% highlight bash linenos %}
-$ chmod
-{% endhighlight %}
+`$ chmod`
 
 ie change mode
 
@@ -133,27 +111,19 @@ $ chmod ug=rw * removes write permission for user and group for all files and di
 $ chmod go= removes all permissions for group and others
 {% endhighlight %}
 
-{% highlight bash linenos %}
-$ chgrp
-{% endhighlight %}
+`$ chgrp`
 
 ie change group
 
-{% highlight bash linenos %}
-$ chown
-{% endhighlight %}
+`$ chown`
 
 ie change owner
 only available for sudo
-{% highlight bash linenos %}
-$ sudo chown 'owner' 'targetowned'
-{% endhighlight %}
+`$ sudo chown 'owner' 'targetowned'`
 
 FIND
 
-{% highlight bash linenos %}
-$ sudo find | -name 'stufftolookfor' -print
-{% endhighlight %}
+`$ sudo find | -name 'stufftolookfor' -print`
 
 sudo to avoid read permission issues
 
@@ -161,9 +131,7 @@ sudo to avoid read permission issues
 
 DISPLAY
 
-{% highlight bash linenos %}
-$ cat
-{% endhighlight %}
+`$ cat`
 
 ie concatenate
 streams content of a file till its end
@@ -171,15 +139,11 @@ hard to tell when a file begins and ends
 -n = numbers lines
 -v = makes all characters printable (not necessarily readable)
 
-{% highlight bash linenos %}
-$ less
-{% endhighlight %}
+`$ less`
 
 shows content of file screen by screen
 
-{% highlight bash linenos %}
-$ less *something.txt
-{% endhighlight %}
+`$ less *something.txt`
 
 displays content of all files matching *something.txt BUT alphabetized (not necessarily in the order you'd wish)
 -M shows percentage for file position + filename
@@ -197,24 +161,17 @@ Without the dash to show percentage and filename by default
 
 MOVE
 
-{% highlight bash linenos %}
-
-$ mv *.{jpg|JPG} 'targetdir'
-
-{% endhighlight %}
-
+`$ mv *.{jpg|JPG} 'targetdir'`
 move in bulk with extension
 
 ---
 
 SIZING
 
-du 'directoryname'
+`$ du 'directoryname'`
 -s = summarize
-ie 
-{% highlight bash linenos %}
-$ du -s *.[^.]
-{% endhighlight %}
+ie
+`$ du -s *.[^.]`
 
 separate totals for directories and files ignoring current and parent directories
 -r = recursive
@@ -228,20 +185,27 @@ $ du -s /Library/* | sort -rn | head
 Will list separate 10 biggest files/directories inside Library (sort by numeric values recursively)
 
 DISK FREE SPACE
-{% highlight bash linenos %}
-$ df
-{% endhighlight %}
+`$ df`
 
 -h human readable - precise
 -H more human readable -slighly less precise
 
 ---
 
-NB
-
-A directory is just another kind of file
-
 INODES
 Block of data chained together
 
 =' You can have available space on your disk but if you have a great number of files and run out of inodes this will be unusable
+
+---
+Applescript:
+osascript -e | somecommand
+
+Applications/Utilities/Script Editor
+
+---
+
+LOGIN SHELL
+chsh
+
+---

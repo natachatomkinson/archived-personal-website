@@ -7,7 +7,6 @@ import { ListItem } from 'material-ui/List'
 
 import MyLocationIcon from 'material-ui/svg-icons/maps/my-location';
 import BookIcon from 'material-ui/svg-icons/maps/local-library';
-import DeveloperModeIcon from 'material-ui/svg-icons/device/developer-mode';
 import WifiIcon from 'material-ui/svg-icons/device/network-wifi';
 import MapIcon from 'material-ui/svg-icons/maps/map';
 import KeyboardIcon from 'material-ui/svg-icons/hardware/keyboard';
@@ -25,46 +24,42 @@ const SNIPPETS = {
     text: 'I live in York, UK.'
   },
   1: {
-    icon: <DeveloperModeIcon />,
-    text: 'I use React and Rails.'
-  },
-  2: {
     icon: <BookIcon />,
     text: 'I am a reader.'
   },
-  3: {
+  2: {
     icon: <MapIcon />,
     text: 'I am a traveller.'
   },
-  4: {
+  3: {
     icon: <KeyboardIcon />,
     text: 'I am a coder.'
   },
-  5: {
+  4: {
     icon: <GoodMoodIcon />,
     text: 'I am a woman.'
   },
-  6: {
+  5: {
     icon: <WifiIcon />,
-    text: 'I blog about my passion for all things code.'
+    text: 'I blog about coding.'
   },
-  7: {
+  6: {
     icon: <SchoolIcon />,
     text: 'I am always learning.'
   },
-  8: {
+  7: {
     text: 'Me gusta el queso y la codificación.'
   },
-  9: {
+  8: {
     text: 'Jag gillar sover och Sverige och kodar.'
   },
-  10: {
+  9: {
     text: 'J’aime le café, les pains au chocolat et programmer.'
   },
-  11: {
+  10: {
     text: 'у меня есть кошка и компьютер.'
   },
-  12: {
+  11: {
     text: 'Anche mi piace il cioccolato e programmare.'
   }
 };

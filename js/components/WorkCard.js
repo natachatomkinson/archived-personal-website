@@ -4,7 +4,7 @@ import FlatButton from 'material-ui/FlatButton';
 import Chip from 'material-ui/Chip';
 
 import MaterialUITheme from './styles/MaterialUITheme';
-import style from './CurrentWorkCard.less';
+import style from './WorkCard.less';
 
 class WorkCard extends Component {
 
@@ -23,8 +23,9 @@ class WorkCard extends Component {
             <CardTitle title="Blank slate JS VR Game" subtitle="Hang on to your cardboard " />
           }
         >
-          <img src='/assets/blank_slate.jpeg'  alt="Blank Slate Game" />
+          <img src='/assets/blank_slate.jpeg' alt="Blank Slate Game" />
         </CardMedia>
+
         <CardTitle titleStyle={{ height: '76px' }} title="Programming obsession" />
 
         <CardText expandable  >

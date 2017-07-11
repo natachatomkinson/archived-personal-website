@@ -1,14 +1,40 @@
 @import './styles/theme.less';
 
-@small_screen_dimensions: 90px;
+@small_screen_final_dimensions: 30px;
+@small_screen_initial_dimensions: 90px;
 @non_small_screen_dimensions: 120px;
+
+.container {
+  position: relative;
+  width: 90%;
+  margin: 24px auto;
+
+  .floatingActionButton {
+    position: absolute;
+
+    bottom: -24px;
+    right: -24px;
+
+    @media(max-width: @small_screen_max_width) {
+      right: -12px;
+    }
+  }
+}
 
 .header {
   text-align: center;
+
+  .headerText {
+    margin-bottom: 36px;
+
+    @media(max-width: @small_screen_max_width) {
+      margin-bottom: 12px;
+    }
+  }
 }
 
 .skillContainerCollapsed {
-  @media (min-width: @medium_screen_min_width) {
+  @media (min-width: @xl_screen_min_width) {
     animation: moveup 1s 200ms cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
   }
 }
@@ -19,23 +45,36 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+
+  @media(max-width: @large_screen_max_width) {
+    display: inline-block;
+  }
 }
 
 .skillContainer {
   position: relative;
-  margin: 24px 0;
+  margin: 24px 0 48px;
+
+  @media(max-width: @large_screen_max_width) {
+    margin: 12px 24px;
+  }
 }
 
 .skillCircleContainer {
  width: 30%;
  margin: 0 1%;
+
+  @media(max-width: @large_screen_max_width) {
+    display: inline-block;
+    margin: 0;
+  }
 }
 
 .skillSquareContainer {
   width: 30%;
 
-  @media(max-width: @small_screen_max_width) {
-    width: 49%;
+  @media(max-width: @large_screen_max_width) {
+    display: inline-block;
   }
 }
 
@@ -48,18 +87,18 @@
   box-shadow: 2px 2px 2px @secondaryBackgroundColor;
   text-transform: uppercase;
 
-  @media(max-width: @small_screen_max_width) {
-    width: @small_screen_dimensions;
-    height: @small_screen_dimensions;
-    line-height: @small_screen_dimensions;
+  @media(max-width: @large_screen_max_width) {
+    width: @small_screen_initial_dimensions;
+    height: @small_screen_initial_dimensions;
+    line-height: @small_screen_initial_dimensions;
+
+    animation: shrinkEllipse 1s 1 200ms ease-out forwards;
   }
 }
 
 .skillCircle {
   border-radius: 50%;
-  //border: 3px lighten(@listBackgroundColor, 1%) solid;
   background: radial-gradient(circle, @listBackgroundColor 60%, lighten(@listBackgroundColor, 5%));
-  //background-color: @listBackgroundColor;
 }
 
 .skillSquare {
@@ -68,38 +107,6 @@
   background-color: @dimPrimaryColor;
   color: @snackBar;
   font-weight: 600;
-}
-
-.summaryContainer, .workContainer, .educationContainer {
-  width: 80%;
-  margin: 0 auto;
-
-  list-style: none;
-
-  .workItem {
-    margin-top: 24px;
-    min-height: 40px;
-  }
-}
-
-@media (max-width: @medium_screen_max_width) {
-  .label {
-    display: none;
-  }
-
-  .icon {
-    display: block;
-  }
-}
-
-@media (min-width: @large_screen_min_width) {
-  .label {
-    display: block;
-  }
-
-  .icon {
-    display: none;
-  }
 }
 
 @keyframes moveup {
@@ -113,5 +120,31 @@
     position: absolute;
     top: 0;
     left: 0;
+  }
+}
+
+@keyframes shrinkEllipse {
+  0% {
+    box-shadow: 0 0 6px 4px @dimDividerColor, 0 0 0 0 @dividerColor, 0 0 0 0 @dimDividerColor;
+  }
+  10% {
+    box-shadow: 0 0 6px 4px @dimPrimaryColor, 0 0 8px 6px @dividerColor, 0 0 8px 10px @dimPrimaryColor;
+  }
+
+  90% {
+    box-shadow: 0 0 6px 4px @dimDividerColor, 0 0 0 5px @dividerColor, 0 0 0 5px @dimDividerColor;
+  }
+
+  100% {
+    box-shadow: 1px 1px 1px @secondaryBackgroundColor;
+    height: @small_screen_final_dimensions;
+    line-height: @small_screen_final_dimensions;
+    background: @listBackgroundColor;
+    border: none;
+    border-radius: 16px;
+    white-space: nowrap;
+    padding: 0;
+    outline: none;
+    font-size: 12px;
   }
 }

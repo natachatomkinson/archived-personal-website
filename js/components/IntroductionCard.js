@@ -3,6 +3,7 @@ import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'm
 import FlatButton from 'material-ui/FlatButton';
 
 import MaterialUITheme from './styles/MaterialUITheme';
+import style from './IntroductionCard.less';
 
 class IntroductionCard extends Component {
 
@@ -14,15 +15,17 @@ class IntroductionCard extends Component {
          showExpandableButton
          actAsExpander
        />
+
        <CardMedia
          expandable
          overlay={
            <CardTitle title="Functional Programming in Racket" subtitle="One n-1 time" />
          }
        >
-         <img src='/assets/Coursera_logo.jpeg'  alt="Blank Slate Game" />
+         <div className={ style.backgroundImage } style={{ backgroundImage: 'url(\'/assets/Coursera_logo.jpeg\')'}} />
        </CardMedia>
-       <CardTitle title="Learning session" titleStyle={{ height: '76px' }} />
+
+       <CardTitle titleStyle={{ height: '76px' }}  title="Learning session" />
 
        <CardText expandable  >
          <p>

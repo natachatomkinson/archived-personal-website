@@ -170,7 +170,6 @@ export default {
     backgroundColor: primaryColor,
     height: '2px',
     maxWidth: '80%',
-    marginTop: '36px',
     marginLeft: 'auto',
     marginRight: 'auto'
   },
@@ -213,6 +212,9 @@ export default {
     overflowX: 'hidden'
   },
 
+  paperPaddingOverride: {
+    padding: '12px 24px 24px 24px'
+  },
 
   paperMarginOverride: {
     padding: '12px 24px 24px 24px',

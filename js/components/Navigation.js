@@ -35,7 +35,7 @@ class Navigation extends Component {
     return (
       <div >
         <AppBar
-          title={ <a className={ fontStyle.unstyledLink } href={ baseUrl }> { title } </a> }
+          title={ <a className={ `${fontStyle.unstyledLink} ${fontStyle.xlHeader}` } href={ baseUrl }> { title } </a> }
           onLeftIconButtonTouchTap={ this.toggleLeftDrawer }
           iconElementRight={
             <a href={ about } className={ `${fontStyle.unstyledLink} ${style.icon}` }>

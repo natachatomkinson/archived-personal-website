@@ -22,11 +22,22 @@ $grey-color:       #828282;
 $grey-color-light: lighten($grey-color, 40%);
 $grey-color-dark:  darken($grey-color, 25%);
 
+//materialTheme Colors
+
+$primaryTextColor: #FFFFFF;
+
+$svg-icon-background: rgba(255, 255, 255, 0.87);
+$primaryColor: #0c8985;
+$boxShadow: rgba(0, 0, 0, 0.12);
+$listBackgroundColor: #0fa8a3;
+
 // Width of the content area
 $content-width:    800px;
 
 $on-palm:          600px;
 $on-laptop:        800px;
+$small_screen_max_width: 445px;
+
 
 // Use media queries like this:
 // @include media-query($on-palm) {

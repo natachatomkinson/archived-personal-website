@@ -11,7 +11,8 @@ dl, dd, ol, ul, figure {
 
 
 /**
- * Basic styling
+ * Basic styling                                           elem.dispatchEvent(event);
+
  */
 body {
     font: $base-font-weight #{$base-font-size}/#{$base-line-height} $base-font-family;
@@ -168,11 +169,120 @@ pre {
     }
 }
 
+/**
+ * Header
+ */
 
+.nav-header {
+    color: $primaryTextColor;
+    background-color: $primaryColor;
+    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    box-shadow: $boxShadow 0 1px 6px, $boxShadow 0 1px 4px;
+    border-radius: 0;
+    position: relative;
+    z-index: 1100;
+    width: 100%;
+    display: flex;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.nav-menu-button {
+    border: 10px;
+    box-sizing: border-box;
+    display: inline-block;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+    text-decoration: none;
+    margin: 8px 8px 0px -16px;
+    padding: 12px;
+    outline: none;
+    font-size: 0;
+    font-weight: inherit;
+    position: relative;
+    z-index: 1;
+    overflow: visible;
+    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    width: 48px;
+    height: 48px;
+    background: none;
+}
+
+.nav-menu-button-icon {
+    display: inline-block;
+    color: $svg-icon-background;
+    fill: $svg-icon-background;
+    height: 24px;
+    width: 24px;
+    user-select: none;
+    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+
+.nav-site-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+    padding-top: 0;
+    letter-spacing: 0;
+    font-size: 24px;
+    font-weight: 400;
+    color: $svg-icon-background;
+    height: 64px;
+    line-height: 64px;
+    flex: 1 1 0;
+}
+
+.nav-about-container {
+    margin-top: 8px;
+    margin-right: -16px;
+    margin-left: auto;
+}
+
+.nav-secondary-icon {
+    transform: translate(-50%, 45%);
+}
+
+.xlHeader {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 12px;
+
+    @include media-query($small_screen_max_width) {
+        font-size: 20px;
+        margin-bottom: 6px;
+    }
+}
+
+.nav-header-icon {
+    @include media-query($small_screen_max_width) {
+        display: none;
+    }
+}
+
+
+/**
+ * Link
+ */
+
+.unstyledLink {
+    text-decoration: none;
+    &:hover {
+        text-decoration: none;
+    }
+    &:visited {
+        color: inherit;
+    }
+
+    color: inherit;
+}
 
 /**
  * Clearfix
  */
+
 %clearfix {
 
     &:after {

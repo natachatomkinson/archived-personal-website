@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 
-import PersonIcon from 'material-ui/svg-icons/action/account-circle';
-import AppBar from 'material-ui/AppBar'
 import Drawer from 'material-ui/Drawer';
 import { ListItem } from 'material-ui/List';
 
 import CONSTANTS from '../Constants';
 import PostsContainer from './PostsContainer';
 
-const { title, baseUrl, about, doodles, resume } = CONSTANTS;
+const { about, doodles, resume } = CONSTANTS;
 
 import fontStyle from './styles/theme.less';
-import style from './Navigation.less';
 
 class Navigation extends Component {
 
@@ -33,15 +30,11 @@ class Navigation extends Component {
     const { isOpenDrawer } = this.state;
 
     return (
-      <div >
-        <AppBar
-          title={ <a className={ `${fontStyle.unstyledLink} ${fontStyle.xlHeader}` } href={ baseUrl }> { title } </a> }
-          onLeftIconButtonTouchTap={ this.toggleLeftDrawer }
-          iconElementRight={
-            <a href={ about } className={ `${fontStyle.unstyledLink} ${style.icon}` }>
-              <PersonIcon style={{ transform: 'translate(-50%, 45%)' }} />
-            </a>
-          }
+      <div>
+
+        <button
+          className={ fontStyle.transparentButton }
+          onClick={ this.toggleLeftDrawer }
         />
 
         <Drawer open={ isOpenDrawer } docked={ false } onRequestChange={ this.toggleLeftDrawer } >
@@ -70,20 +63,12 @@ class Navigation extends Component {
   }
 
   toggleLeftDrawer() {
-    const { isOpenDrawer} = this.state;
+    const { isOpenDrawer } = this.state;
 
     this.setState ({
       isOpenDrawer: !isOpenDrawer
     })
   }
 }
-
-Navigation.propTypes = {
-
-};
-
-Navigation.defaultProps = {
-
-};
 
 module.exports = Navigation;

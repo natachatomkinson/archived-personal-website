@@ -2,11 +2,11 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    homepage: './js/App.js',
-    default: './js/Default.js',
-    cssDoodlePage: './js/DoodlePage.js',
-    about: './js/AboutPage.js',
-    resume: './js/Resume.js'
+    homepage: ['./js/GoogleAnalytics.js','./js/App.js'],
+    default: ['./js/GoogleAnalytics.js', './js/Default.js'],
+    cssDoodlePage: ['./js/GoogleAnalytics.js', './js/DoodlePage.js'],
+    about: ['./js/GoogleAnalytics.js', './js/AboutPage.js'],
+    resume: ['./js/GoogleAnalytics.js', './js/Resume.js']
   },
   output: {
     path: path.join(__dirname, "src"),

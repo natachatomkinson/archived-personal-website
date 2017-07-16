@@ -11,10 +11,21 @@ import style from './Homepage.less';
 
 class Homepage extends Component {
 
+  constructor(props, context) {
+    super(props, context);
+
+    this.toggleNavigation = this.toggleNavigation.bind(this);
+
+    this.state = {
+      openNavigation: ''
+    };
+  }
+
+
   render() {
     return (
-      <div >
-        <Navigation />
+      <div onWheel={ this.toggleNavigation }>
+        <Navigation openDrawerWithSlide={ this.state.openNavigation } />
 
         <div className={ style.container }>
           <article className={ style.cardContainer }>
@@ -37,6 +48,22 @@ class Homepage extends Component {
         </div>
       </div>
     );
+  }
+
+  toggleNavigation(event) {
+
+    if (event.deltaY === 0 && event.deltaX < 0) {
+      this.setState({
+        openNavigation: 'right'
+      });
+
+    } else if (event.deltaY === 0 && event.deltaX > 0 ) {
+
+      this.setState ( {
+        openNavigation: 'left'
+      });
+
+    }
   }
 }
 

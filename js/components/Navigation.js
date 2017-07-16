@@ -16,10 +16,18 @@ class Navigation extends Component {
     super(props, context);
 
     this.toggleLeftDrawer = this.toggleLeftDrawer.bind(this);
+    this.toggleLeftDrawerWithSlide = this.toggleLeftDrawerWithSlide.bind(this);
 
     this.state = {
       isOpenDrawer: false
     };
+  }
+
+  componentWillUpdate(nextProps) {
+
+    if( nextProps.openDrawerWithSlide !== this.props.openDrawerWithSlide ) {
+      this.toggleLeftDrawer();
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -68,6 +76,21 @@ class Navigation extends Component {
     this.setState ({
       isOpenDrawer: !isOpenDrawer
     })
+  }
+
+  toggleLeftDrawerWithSlide() {
+    const { isOpenDrawer } = this.state;
+    const { openDrawerWithSlide } = this.props;
+
+    if (isOpenDrawer && openDrawerWithSlide === 'right') {
+      this.setState({
+        isOpenDrawer: false
+      });
+    } else if (!isOpenDrawer && openDrawerWithSlide === 'left') {
+      this.setState({
+        isOpenDrawer: true
+      });
+    }
   }
 }
 

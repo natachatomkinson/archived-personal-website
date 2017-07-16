@@ -179,7 +179,7 @@ class ExperienceComponent extends Component {
 
            <li>
              <p className={ `${fontStyle.subHeader} ${style.educationLabel}` }>
-               C.A.P.E.S. (= P.D.G.E.), English teaching
+               C.A.P.E.S. (= P.G.D.E.), English teaching
              </p>
              <time className={ `${fontStyle.date} ${style.educationDate}` }>
                2006-2007

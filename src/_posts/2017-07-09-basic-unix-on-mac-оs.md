@@ -24,6 +24,10 @@ A directory is just another kind of file
 BASIC COMMANDS
 
 {% highlight bash linenos %}
+$ ps -asx (to list all programs and processes for all users)
+$ ps -ax | grep <program>
+$ cp <search1> <search2> ~ (copy)
+$ ls -a (list all)
 $ <command> -options <filename(s)>s
 $ pwd - Print Working Directory
 $ man - Manual
@@ -209,3 +213,20 @@ LOGIN SHELL
 chsh
 
 ---
+
+VI(M)
+
+---
+
+Mac to Unix
+
+`$ m2u maxfile unixfile`
+
+Unix to Mac
+
+`$u2m unixfile macfile`
+
+for fixing returns
+
+---
+

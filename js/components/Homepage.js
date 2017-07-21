@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import RssFeedIcon from 'material-ui/svg-icons/communication/rss-feed';
+import EmailIcon from 'material-ui/svg-icons/communication/email';
 
 import Navigation from './Navigation';
 import CurrentWorkCard from './WorkCard';
@@ -38,13 +39,23 @@ class Homepage extends Component {
             </section>
           </article>
 
-          <a className={ fontStyle.unstyledLink } href={ './feed.xml' }>
+          <a className={ fontStyle.unstyledLink } target="_blank" href='mailto:natseg@gmail.com?Subject=I%20have%20a%20question' rel="no-openner no-referrer">
             <RaisedButton
               primary
               style={{ height: '50px' }}
-              icon={ <RssFeedIcon style={{ width: '40px', height: '40px', transform: 'translateY(5px)' }}/> }
+              icon={ <EmailIcon style={{ width: '40px', height: '40px', transform: 'translateY(5px)' }}/> }
             />
           </a>
+
+          <span className={ style.button }>
+            <a className={ fontStyle.unstyledLink } href={ './feed.xml' }>
+              <RaisedButton
+                primary
+                style={{ height: '50px' }}
+                icon={ <RssFeedIcon style={{ width: '40px', height: '40px', transform: 'translateY(5px)' }}/> }
+              />
+            </a>
+          </span>
         </div>
       </div>
     );

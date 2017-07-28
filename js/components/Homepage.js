@@ -3,6 +3,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import RssFeedIcon from 'material-ui/svg-icons/communication/rss-feed';
 import EmailIcon from 'material-ui/svg-icons/communication/email';
 
+import withSwipe from './withSwipe';
 import Navigation from './Navigation';
 import CurrentWorkCard from './WorkCard';
 import IntroductionCard  from './IntroductionCard';
@@ -11,22 +12,10 @@ import fontStyle from './styles/theme.less';
 import style from './Homepage.less';
 
 class Homepage extends Component {
-
-  constructor(props, context) {
-    super(props, context);
-
-    this.toggleNavigation = this.toggleNavigation.bind(this);
-
-    this.state = {
-      openNavigation: ''
-    };
-  }
-
-
   render() {
     return (
-      <div onWheel={ this.toggleNavigation }>
-        <Navigation openDrawerWithSlide={ this.state.openNavigation } />
+      <div >
+        <Navigation openDrawerWithSlide={ this.props.openDrawerWithSlide } />
 
         <div className={ style.container }>
           <article className={ style.cardContainer }>
@@ -60,22 +49,6 @@ class Homepage extends Component {
       </div>
     );
   }
-
-  toggleNavigation(event) {
-
-    if (event.deltaY === 0 && event.deltaX < 0) {
-      this.setState({
-        openNavigation: 'right'
-      });
-
-    } else if (event.deltaY === 0 && event.deltaX > 0 ) {
-
-      this.setState ( {
-        openNavigation: 'left'
-      });
-
-    }
-  }
 }
 
 Homepage.propTypes = {
@@ -86,4 +59,4 @@ Homepage.defaultProps = {
 
 };
 
-module.exports = Homepage;
+export default withSwipe(Homepage);

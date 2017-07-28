@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
 import { ListItem } from 'material-ui/List'
+import withSwipe from './withSwipe';
 
 import MyLocationIcon from 'material-ui/svg-icons/maps/my-location';
 import BookIcon from 'material-ui/svg-icons/maps/local-library';
@@ -69,7 +70,7 @@ class About extends Component {
   render() {
     return (
       <div>
-        <Navigation />
+        <Navigation openDrawerWithSlide={ this.props.openDrawerWithSlide } />
 
         <Paper style={ MaterialUITheme.paperMarginOverride }>
           { _.map(SNIPPETS, ({ icon, text }, index)=> {
@@ -103,4 +104,4 @@ About.defaultProps = {
 
 };
 
-module.exports = About;
+export default withSwipe(About);

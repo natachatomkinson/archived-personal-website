@@ -4,12 +4,11 @@ import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 
+import withSwipe from './withSwipe';
 import Navigation from './Navigation';
 import ExperienceComponent from './ExperienceComponent';
 
 import FileDownloadIcon from 'material-ui/svg-icons/file/file-download';
-
-import { resumePDF } from '../Constants';
 
 import MaterialUITheme from './styles/MaterialUITheme';
 import fontStyle from './styles/theme.less';
@@ -43,7 +42,7 @@ class ResumePage extends Component {
 
     return (
       <div onWheel={ this.handleScroll } >
-        <Navigation />
+        <Navigation openDrawerWithSlide={ this.props.openDrawerWithSlide } />
 
         <div className={ style.container }>
           <Paper style={ MaterialUITheme.paperPaddingOverride } >
@@ -94,7 +93,7 @@ class ResumePage extends Component {
 
             <ExperienceComponent />
 
-            <a href={ resumePDF } className={ fontStyle.unstyledLink } target="_blank" rel="noopener noreferrer">
+            <a href='/assets/Natacha_Segala_Web_Dev_CV.pdf' className={ fontStyle.unstyledLink } target="_blank" rel="noopener noreferrer">
               <FloatingActionButton className={ style.floatingActionButton } >
                 <FileDownloadIcon />
               </FloatingActionButton>
@@ -113,4 +112,4 @@ class ResumePage extends Component {
   }
 }
 
-module.exports = ResumePage;
+export default withSwipe(ResumePage);

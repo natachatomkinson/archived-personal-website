@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navigation from './Navigation';
+import withSwipe from './withSwipe';
 
 import style from './CssDoodlePage.less';
 
@@ -8,7 +9,7 @@ class CssDoodlePage extends Component {
   render() {
     return (
       <div>
-        <Navigation />
+        <Navigation openDrawerWithSlide={ this.props.openDrawerWithSlide } />
 
         <div className={ style.container }>
 
@@ -39,4 +40,4 @@ CssDoodlePage.defaultProps = {
 
 };
 
-module.exports = CssDoodlePage;
+export default withSwipe(CssDoodlePage);

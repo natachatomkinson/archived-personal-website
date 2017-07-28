@@ -10,11 +10,14 @@ import BulletListIcon from 'material-ui/svg-icons/editor/format-list-bulleted';
 import fontStyle from './styles/theme.less';
 import style from './ExperienceComponent.less';
 
+const TAB_ARRAY_LENGTH=2;
+
 class ExperienceComponent extends Component {
   constructor(props, context) {
     super(props, context);
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleWheel = this.handleWheel.bind(this);
 
     this.state = {
       slideIndex: 0,
@@ -23,7 +26,7 @@ class ExperienceComponent extends Component {
 
   render() {
    return (
-     <div>
+     <div onWheel={ this.handleWheel }>
        <Tabs
          onChange={ this.handleChange }
          value={ this.state.slideIndex }
@@ -209,6 +212,29 @@ class ExperienceComponent extends Component {
    );
   }
 
+  handleWheel(event) {
+    const { slideIndex } = this.state;
+
+    const swipeRight = event.deltaY === 0 && event.deltaX < 0 && slideIndex < TAB_ARRAY_LENGTH;
+    const swipeLeft = event.deltaY === 0 && event.deltaX > 0 && slideIndex > 0;
+    event.stopPropagation();
+
+    if (swipeRight) {
+      event.preventDefault();
+
+      this.setState({
+        slideIndex: slideIndex+1
+      });
+
+    } else if (swipeLeft) {
+      event.preventDefault();
+
+      this.setState ( {
+        slideIndex: slideIndex-1
+      });
+    }
+  }
+
   handleChange(value) {
     this.setState({
       slideIndex: value,
@@ -216,4 +242,4 @@ class ExperienceComponent extends Component {
   };
 }
 
-module.exports = ExperienceComponent;
+export default ExperienceComponent;

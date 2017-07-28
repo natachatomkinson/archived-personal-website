@@ -46,6 +46,12 @@ class Navigation extends Component {
         />
 
         <Drawer open={ isOpenDrawer } docked={ false } onRequestChange={ this.toggleLeftDrawer } >
+          <a className={ fontStyle.unstyledLink } href={ '/' }>
+            <ListItem
+              primaryText="HOMEPAGE"
+            />
+          </a>
+
           <PostsContainer />
 
           <a className={ fontStyle.unstyledLink } href={ doodles }>

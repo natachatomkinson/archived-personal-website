@@ -5,7 +5,6 @@ const CONSTANTS = {
     about: '/about',
     doodles: '/css-doodles',
     resume: '/resume',
-    resumePDF: '/assets/Natacha_Segala_Web_Dev_CV.pdf',
     description: 'This site is meant for you to get to know me Natacha Segala a little bit better. It deals with coding in Javascript using React and es6 and Ruby using Rails. It also deals with programming in a broader sense.',
 };
 

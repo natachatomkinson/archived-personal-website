@@ -34,7 +34,7 @@ List of methods:
 
 |structure|what to know|
 |---|---|
-`.find + id or [ids]` |raises an ActiveRecord::RecordNotFound error in case of no record |
+`.find(id || [ids])` |raises an ActiveRecord::RecordNotFound error in case of no record |
 
 All methods below:
 - do not raise exceptions
@@ -43,7 +43,7 @@ All methods below:
 |structure|what to know|
 |---|---|
 |`.take(optional n)`|picks one (or n) 'random' record from table, returns nil/no exception in case of no record |
-| `.first(optional n) / .last(optional n)` | returns first/last (n) record(s) <br>default -> ordered by primary key with `.order(:some_attribute)` -> ordered by specified attribute <br>with `default_scope` on model -> ordered by scope on model |
+| `.first(optional n) / .last(optional n)` | returns first/last (n) record(s) <br>default -> ordered by primary key <br>with `.order(:attribute)` -> ordered by specified attribute <br>with `default_scope` on model -> ordered by scope on model |
 `.find_by`|returns record based on attribute search.<br> Bonus: can be written `.find_by_some_attribute_name`|
 
 To perform big queries:
@@ -65,54 +65,46 @@ Options:
 
 |structure|what to know|
 |---|---|
-|`.find_each`|1. retrieve records in batches 2. yields each one to the block <br> NB:<br>If an order is present, the behaviour depends on the flag `config.active_record.error_on_ignored_order`.<br>If `true`, `ArgumentError` is raised.<br>By default, the order is ignored and a warning issued.<br>This warning can be overridden with the option `:error_on_ignore`. |
+|`.find_each`|1. retrieve records in batches<br>2. yields each one to the block <br> NB:<br>If an order is present, the behaviour depends on the flag `config.active_record.error_on_ignored_order`.<br>If `true`, `ArgumentError` is raised.<br>By default, the order is ignored and a warning issued.<br>This warning can be overridden with the option `:error_on_ignore`. |
 |`.find_in_batches`|1. retrieve records in batches<br>yields batches to the block as an array of models|
 
 ---
 
 ### CONDITIONS
 
-`.where`
-
-conditions can be string, array or hash
-Do not use with pure strings => SQL injection
-
-structure:
-`("some_attribute = ? AND other_attribute= ?", params[:param], params[:other_param])`
-
-or:
-`("some_attribute >= :some_attribute AND other_attribute <= :other_attribute",
-{some_attribute: params[:some_attribute], other_attribute: params[:other_attribute]})`
+|structure|what to know|
+|---|---|
+|`.where`<br><br>`.where("attribute = ? AND other_attribute= ?", params[:param], params[:other_param])`<br><br>`.where("attribute >= :attribute AND other_attribute <= :other_attribute",{attribute: params[:attribute], other_attribute: params[:other_attribute]})`|conditions can be string, array or hash<br>Do not use with pure strings => SQL injection|
 
 #### Equality:
 
-`(some_attribute: some_value)` || `('some_attribute' => some_value)`
+`(attribute: some_value)` || `('attribute' => some_value)`
 
 Belongs_to or polymorphic associations can be used:
-`Table.where(some_attribute: some_record)`
-`Table.joins(:some_attribute).where(some_attributes: { other_attribute: record })`
+`Table.where(attribute: some_record)`
+`Table.joins(:attribute).where(some_attributes: { other_attribute: record })`
 
 #### Range:
 
-`Table.where(some_attribute: some_range_start..some_range_end)`
+`Table.where(attribute: some_range_start..some_range_end)`
 
 #### Subset:
-`Table.where(some_attribute: [somearray])`
+`Table.where(attribute: [somearray])`
 
 #### Not:
 `Table.where.not(somecondition)`
 
 ### ORDERING
-`.order(:some_attribute)`
-`.order(some_attribute: :desc) or .order(some_attribute: :asc)`
-`.order(some_attribute: :asc, other_attribute: :desc)`
+`.order(:attribute)`
+`.order(attribute: :desc) or .order(attribute: :asc)`
+`.order(attribute: :asc, other_attribute: :desc)`
 etc.
 
 if using MySQL 5.7.5 and above, on selecting fields from a result set using methods like select, pluck and ids, order method raises ActiveRecord::StatementInvalid  unless the field(s) used in order clause are included in the select list.
 
 ### SELECTING
 
-`.select('some_attribute, other_attribute')`
+`.select('attribute, other_attribute')`
 
 initialises a model object with only these fields
 all other fields from the original model do not exist => `ActiveModel::MissingAttributeError: missing attribute: <attribute>`

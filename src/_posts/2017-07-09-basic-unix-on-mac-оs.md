@@ -11,13 +11,28 @@ tags:
 - education
 - bash
 meta:
-    _edit_last: '1'
+    _edit_last: '2'
     author:
     email: natseg@gmail.com
     display_name: natseg
 ---
 
-Here is a summary of my notes of the book 'Learning Unix for OS X' by Dave Taylor.
+Edit 2017-09-06:
+
+If I open my terminal and type:
+`$ alias`
+
+This is roughly what I get (minus work-related ones):
+{% highlight bash linenos %}
+alias addkeys='ssh-add ~/.ssh/pro_key && ssh-add ~/.ssh/perso_key'
+alias cp='cp -i'
+alias ls='ls -aF'
+alias mv='mv -i'
+alias rm='rm -i'`
+alias resizePic='convert -resize 50%  '
+{% endhighlight %}
+
+Additionally here is a summary of my notes of the book 'Learning Unix for OS X' by Dave Taylor.
 
 A directory is just another kind of file
 

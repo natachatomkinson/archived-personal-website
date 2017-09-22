@@ -1,4 +1,4 @@
-# Blog built using a combination of Jekyll, Webpack and React
+# Blog built using Jekyll and React
 
 Website to access author's current work and interests.
 
@@ -9,7 +9,7 @@ Clone the repository using https or ssh.
 Once in the directory, run the bundler gem to install gems.
 
 ```
-$bundle install
+$ bundle install
 ```
 
 Run your favourite node package manager install command to install all node modules.

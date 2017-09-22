@@ -235,7 +235,7 @@ VI(M)
 
 Mac to Unix
 
-`$ m2u maxfile unixfile`
+`$ m2u macfile unixfile`
 
 Unix to Mac
 

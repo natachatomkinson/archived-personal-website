@@ -46,7 +46,7 @@ class PostContainer extends Component {
         const link = _.drop(_.split(href, '/'),3).join('/');
 
         return (
-          <a href={ `../${link}` } className={ fontStyle.unstyledLink }  key={ title } >
+          <a href={ `https://natachasegala.co.uk/${link}` } className={ fontStyle.unstyledLink }  key={ title } >
             <ListItem >
               { _.upperCase(title) }
             </ListItem>

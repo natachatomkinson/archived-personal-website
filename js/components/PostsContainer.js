@@ -2,8 +2,6 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { ListItem } from 'material-ui/List';
 
-import fontStyle from './styles/theme.less';
-
 let INDEX = [];
 
 function fetchPostIndex() {
@@ -26,6 +24,12 @@ function fetchPostIndex() {
 }
 
 class PostContainer extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
   render() {
     return (
       <ListItem
@@ -46,15 +50,21 @@ class PostContainer extends Component {
         const link = _.drop(_.split(href, '/'),3).join('/');
 
         return (
-          <a href={ `https://natachasegala.co.uk/${link}` } className={ fontStyle.unstyledLink }  key={ title } >
-            <ListItem >
-              { _.upperCase(title) }
-            </ListItem>
-          </a>
-        )
+          <ListItem onClick={ this.handleClick(link) } key={ title } >
+            { _.upperCase(title) }
+          </ListItem>
+        );
       }
     }));
   };
+
+  handleClick(link) {
+    return (e) => {
+      e.preventDefault();
+
+      window.location.href=`http://natachasegala.co.uk/${link}`;
+    }
+  }
 }
 
 PostContainer.propTypes = {};

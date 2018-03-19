@@ -7,3 +7,8 @@ node_modules
 public
 *.entry.js
 _site
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

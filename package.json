@@ -11,6 +11,7 @@
     "watch": "webpack -w"
   },
   "dependencies": {
+    "ansi-regex": "^3.0.0",
     "autoprefixer-loader": "^3.2.0",
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.0",
@@ -28,6 +29,6 @@
     "react-swipeable-views": "^0.12.3",
     "react-tap-event-plugin": "^2.0.1",
     "style-loader": "^0.18.2",
-    "webpack": "^3.0.0"
+    "webpack": "^3.11.0"
   }
 }

@@ -29,7 +29,7 @@ class IntroductionCard extends Component {
 
        <CardText expandable  >
          <p>
-           Coursera module focusing on functional programming
+           Elixir
          </p>
        </CardText>
 

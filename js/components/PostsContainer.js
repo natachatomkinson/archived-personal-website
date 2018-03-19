@@ -4,6 +4,11 @@ import { ListItem } from 'material-ui/List';
 
 let INDEX = [];
 
+function baseUrl() {
+  const getUrl = window.location;
+  return getUrl.protocol + "//" + getUrl.host + "/";
+}
+
 function fetchPostIndex() {
   return fetch('/feed.xml', {
     headers: {
@@ -62,7 +67,7 @@ class PostContainer extends Component {
     return (e) => {
       e.preventDefault();
 
-      window.location.href=`http://natachasegala.co.uk/${link}`;
+      window.location.assign(`${baseUrl()}${link}`);
     }
   }
 }

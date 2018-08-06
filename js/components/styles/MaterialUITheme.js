@@ -31,9 +31,7 @@ const buttonTextColor = 'rgba(255, 255, 255, 0.87)';
 export default {
   fontFamily: 'Roboto, sans-serif',
 
-
   listBackgroundColor: listBackgroundColor,
-
 
   palette: {
     primary1Color: primaryColor,

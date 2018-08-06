@@ -1,5 +1,14 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+import compact from 'lodash/compact';
+import map from 'lodash/map';
+import upperCase from 'lodash/upperCase';
+import each from 'lodash/each';
+
+import drop from 'lodash/drop';
+import split from 'lodash/split';
+
 import { ListItem } from 'material-ui/List';
 
 let INDEX = [];
@@ -19,7 +28,7 @@ function fetchPostIndex() {
     .then(text => (new window.DOMParser()).parseFromString(text, "text/xml"))
     .then(data => data.getElementsByTagName("link"))
     .then(entries => {
-      return _.each(entries, (entry, index)=> {
+      return each(entries, (entry, index)=> {
         INDEX[index] = {
           href: entry.getAttribute('href'),
           title: entry.getAttribute('title'),
@@ -50,13 +59,13 @@ class PostContainer extends Component {
 
     fetchPostIndex();
 
-    return _.compact(_.map(INDEX, ({ href, title })=> {
+    return compact(map(INDEX, ({ href, title })=> {
       if (title) {
-        const link = _.drop(_.split(href, '/'),3).join('/');
+        const link = drop(split(href, '/'),3).join('/');
 
         return (
           <ListItem onClick={ this.handleClick(link) } key={ title } >
-            { _.upperCase(title) }
+            { upperCase(title) }
           </ListItem>
         );
       }

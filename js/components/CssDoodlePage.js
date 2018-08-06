@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import Navigation from './Navigation';
 import withSwipe from './withSwipe';
 
@@ -33,11 +35,11 @@ class CssDoodlePage extends Component {
 }
 
 CssDoodlePage.propTypes = {
-
+  openDrawerWithSlide: PropTypes.bool
 };
 
 CssDoodlePage.defaultProps = {
-
+  openDrawerWithSlide: true
 };
 
 export default withSwipe(CssDoodlePage);

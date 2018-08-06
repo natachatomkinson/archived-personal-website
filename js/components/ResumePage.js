@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
@@ -111,5 +112,13 @@ class ResumePage extends Component {
     });
   }
 }
+
+ResumePage.propTypes = {
+  openDrawerWithSlide: PropTypes.bool
+};
+
+ResumePage.defaultProps = {
+  openDrawerWithSlide: true
+};
 
 export default withSwipe(ResumePage);

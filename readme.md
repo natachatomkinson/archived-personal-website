@@ -16,8 +16,13 @@ Run your favourite node package manager install command to install all node modu
 
 ```
 $ yarn install
-   ```
+```
 
+### Building
+
+```
+$ bundle exec jekyll build
+```
 
 ### Serving
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Drawer from 'material-ui/Drawer';
 import { ListItem } from 'material-ui/List';
@@ -23,9 +24,9 @@ class Navigation extends Component {
     };
   }
 
-  componentWillUpdate(nextProps) {
+  componentDidUpdate(prevProps) {
 
-    if( nextProps.openDrawerWithSlide !== this.props.openDrawerWithSlide ) {
+    if (prevProps.openDrawerWithSlide !== this.props.openDrawerWithSlide) {
       this.toggleLeftDrawer();
     }
   }
@@ -100,4 +101,12 @@ class Navigation extends Component {
   }
 }
 
-module.exports = Navigation;
+Navigation.propTypes = {
+  openDrawerWithSlide: PropTypes.bool
+};
+
+Navigation.defaultProps = {
+  openDrawerWithSlide: true
+};
+
+export default Navigation;

@@ -16,8 +16,8 @@
 title: /^1 pat{2}ern 2 hap{2}ines{2}.*/
 email: natseg@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  This site is meant for you to get to know me a little bit better. It deals with coding in Javascript using React and es6 and Ruby using Rails.
-  And programming in a broader sense.
+  Get to know me a little bit better. Javascript using React and Typescript, Ruby using Rails, Elixir with Phoenix.
+  Programming and learning in a broader sense.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://natachasegala.co.uk" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  natseg

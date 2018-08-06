@@ -1,6 +1,10 @@
-import _ from 'lodash';
-
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+import size from 'lodash/size';
+import toNumber from 'lodash/toNumber';
+import map from 'lodash/map';
+
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
 import { ListItem } from 'material-ui/List'
@@ -73,9 +77,9 @@ class About extends Component {
         <Navigation openDrawerWithSlide={ this.props.openDrawerWithSlide } />
 
         <Paper style={ MaterialUITheme.paperMarginOverride }>
-          { _.map(SNIPPETS, ({ icon, text }, index)=> {
+          { map(SNIPPETS, ({ icon, text }, index)=> {
             const divider = function(){
-              if ((_.toNumber(index)+1) !== _.size(SNIPPETS)) {
+              if ((toNumber(index)+1) !== size(SNIPPETS)) {
                 return <Divider/>
               }
             }();
@@ -97,11 +101,11 @@ class About extends Component {
 }
 
 About.propTypes = {
-
+  openDrawerWithSlide: PropTypes.bool
 };
 
 About.defaultProps = {
-
+  openDrawerWithSlide: true
 };
 
 export default withSwipe(About);

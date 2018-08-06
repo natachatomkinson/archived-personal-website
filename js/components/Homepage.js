@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import RaisedButton from 'material-ui/RaisedButton';
 import RssFeedIcon from 'material-ui/svg-icons/communication/rss-feed';
 import EmailIcon from 'material-ui/svg-icons/communication/email';
@@ -52,11 +54,11 @@ class Homepage extends Component {
 }
 
 Homepage.propTypes = {
-
+  openDrawerWithSlide: PropTypes.bool
 };
 
 Homepage.defaultProps = {
-
+  openDrawerWithSlide: true
 };
 
 export default withSwipe(Homepage);

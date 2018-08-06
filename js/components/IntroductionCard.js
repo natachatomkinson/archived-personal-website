@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
@@ -19,23 +21,17 @@ class IntroductionCard extends Component {
        <CardMedia
          expandable
          overlay={
-           <CardTitle title="Functional Programming in Racket" subtitle="One n-1 time" />
+           <CardTitle title="The Complete Elixir and Phoenix Bootcamp" subtitle="|>" />
          }
        >
-         <div className={ style.backgroundImage } style={{ backgroundImage: 'url(\'/assets/Coursera_logo.jpeg\')'}} />
+         <div className={ style.backgroundImage } style={{ backgroundImage: 'url(\'/assets/udemy_logo.svg\')'}} />
        </CardMedia>
 
        <CardTitle titleStyle={{ height: '76px' }}  title="Learning session" />
 
-       <CardText expandable  >
-         <p>
-           Elixir
-         </p>
-       </CardText>
-
        <CardActions>
-         <a href='https://www.coursera.org/learn/programming-languages-part-b/' target="_blank" rel="no-openner no-referrer">
-           <FlatButton label="Go to Coursera" />
+         <a href='https://www.udemy.com/the-complete-elixir-and-phoenix-bootcamp-and-tutorial' target="_blank" rel="noopener noreferrer">
+           <FlatButton label="Go to Udemy" />
          </a>
        </CardActions>
      </Card>

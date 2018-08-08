@@ -18,4 +18,4 @@ class Default extends Component {
     );
   }
 }
-render(<Default />, document.getElementById('container'));
+render(<Default />, document.getElementById('root'));

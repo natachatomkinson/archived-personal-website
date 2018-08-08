@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Drawer from 'material-ui/Drawer';
 import { ListItem } from 'material-ui/List';
 
-import CONSTANTS from '../Constants';
+import {CONSTANTS} from '../Constants';
 import PostsContainer from './PostsContainer';
 
 const { about, doodles, resume } = CONSTANTS;
@@ -102,11 +102,11 @@ class Navigation extends Component {
 }
 
 Navigation.propTypes = {
-  openDrawerWithSlide: PropTypes.bool
+  openDrawerWithSlide: PropTypes.string
 };
 
 Navigation.defaultProps = {
-  openDrawerWithSlide: true
+
 };
 
 export default Navigation;

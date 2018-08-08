@@ -101,11 +101,11 @@ class About extends Component {
 }
 
 About.propTypes = {
-  openDrawerWithSlide: PropTypes.bool
+  openDrawerWithSlide: PropTypes.string.isRequired
 };
 
 About.defaultProps = {
-  openDrawerWithSlide: true
+
 };
 
 export default withSwipe(About);

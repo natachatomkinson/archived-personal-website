@@ -35,11 +35,11 @@ class CssDoodlePage extends Component {
 }
 
 CssDoodlePage.propTypes = {
-  openDrawerWithSlide: PropTypes.bool
+  openDrawerWithSlide: PropTypes.string.isRequired
 };
 
 CssDoodlePage.defaultProps = {
-  openDrawerWithSlide: true
+
 };
 
 export default withSwipe(CssDoodlePage);

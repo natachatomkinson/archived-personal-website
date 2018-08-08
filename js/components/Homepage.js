@@ -54,11 +54,11 @@ class Homepage extends Component {
 }
 
 Homepage.propTypes = {
-  openDrawerWithSlide: PropTypes.bool
+  openDrawerWithSlide: PropTypes.string.isRequired
 };
 
 Homepage.defaultProps = {
-  openDrawerWithSlide: true
+  
 };
 
 export default withSwipe(Homepage);

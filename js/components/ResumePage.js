@@ -43,6 +43,7 @@ class ResumePage extends Component {
 
     return (
       <div onWheel={ this.handleScroll } >
+
         <Navigation openDrawerWithSlide={ this.props.openDrawerWithSlide } />
 
         <div className={ style.container }>
@@ -73,7 +74,7 @@ class ResumePage extends Component {
               </div>
               <div className={ style.skillCircleContainer }>
                 <figure className={ `${fontStyle.body} ${style.skillCircle}` }  >
-                  HTML & CSS
+                  ELIXIR
                 </figure>
               </div>
 
@@ -114,11 +115,11 @@ class ResumePage extends Component {
 }
 
 ResumePage.propTypes = {
-  openDrawerWithSlide: PropTypes.bool
+  openDrawerWithSlide: PropTypes.string.isRequired
 };
 
 ResumePage.defaultProps = {
-  openDrawerWithSlide: true
+
 };
 
 export default withSwipe(ResumePage);

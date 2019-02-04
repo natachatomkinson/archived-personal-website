@@ -85,4 +85,4 @@ PostContainer.propTypes = {};
 
 PostContainer.defaultProps = {};
 
-module.exports = PostContainer;
+export default PostContainer;

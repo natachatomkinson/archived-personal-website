@@ -48,5 +48,5 @@ IntroductionCard.defaultProps = {
 
 };
 
-module.exports = IntroductionCard;
+export default IntroductionCard;
 

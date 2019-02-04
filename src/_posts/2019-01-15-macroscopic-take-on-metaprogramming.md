@@ -1,7 +1,7 @@
 ---
 layout: post
 title: A Macroscopic Take on Metaprogramming
-date: 2017-07-09
+date: 2019-01-15
 type: post
 published: true
 status: publish

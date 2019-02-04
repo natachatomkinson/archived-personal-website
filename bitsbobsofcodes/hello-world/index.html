@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Helloworld vs FizzBuzz</title>
+  <meta name="description" content="Hello World is overrated or so it seems.2017/08/03 - Edit:  Tom Scott (in good company up in my personal Pantheon with Carolyn Porco, Freya HoffMeister and M...">
+
+  <link rel="stylesheet" href="/main.css"  type="text/css">
+  <link rel="icon" sizes="32x32" href="/assets/favicon.png">
+
+  <link rel="canonical" href="https://natachasegala.co.uk/bitsbobsofcodes/hello-world/">
+  <link rel="alternate" type="application/rss+xml" title="/^1 pat{2}ern 2 hap{2}ines{2}.*/" href="https://natachasegala.co.uk/feed.xml">
+</head>
+
+<header>
+  <nav class="nav-header">
+    <button tabindex="0" type="button" class="nav-menu-button">
+      <svg viewBox="0 0 24 24" class="nav-menu-button-icon">
+        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z">
+        </path>
+      </svg>
+    </button>
+    <div class="nav-site-title">
+      <a class="unstyledLink xlHeader" href="/">
+        /^1 pat{2}ern 2 hap{2}ines{2}.*/
+      </a>
+    </div>
+
+    <div class="nav-about-container" >
+      <a href="/about" class="unstyledLink nav-header-icon">
+
+        <svg viewBox="0 0 24 24" class="nav-menu-button-icon nav-secondary-icon" >
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z">
+          </path>
+        </svg>
+      </a>
+    </div>
+  </nav>
+</header>
+
+
+<body>
+<div id="root"></div>
+
+<div class="page-content">
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+            <h1 class="post-title" itemprop="name headline">Helloworld vs FizzBuzz</h1>
+            <p class="post-meta"><time datetime="2016-02-06T14:10:27+00:00" itemprop="datePublished">Feb 6, 2016</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{"email"=>"natseg@gmail.com", "display_name"=>"natseg"}</span></span></p>
+        </header>
+
+        <div class="post-content" itemprop="articleBody">
+            <p>Hello World is overrated or so it seems.</p>
+<b><p>2017/08/03 - Edit:</p>
+  <div>Tom Scott (in good company up in my personal Pantheon with Carolyn Porco, Freya HoffMeister and Malcolm Gladwell) <a href="https://www.youtube.com/watch?v=QPZ0pIK_wsc" target="_blank" rel="nooppener noreferrer">just posted a video about it</a>.</div>
+  <div>And as per the usual, it's interesting. It touches on why it's important to think about code that scales and maintains.</div>
+  <div>Generous coding as I like to think about it.</div>
+  <div>He mentions that this type of practical thinking is something you cannot get out of school.</div>
+  <div>I am trying to catch up on my spare time on general all-encompassing computing principles.</div>
+  <div>Yet the practical value I get out of working and learning on the job is priceless.</div>
+</b>
+<br />
+<p>Upon discussing the matter of recruitment, I was advised by a clojure-lover friend of mine to try my logical skills at fizzbuzz.</p>
+<p>Apparently, <a href="https://en.wikipedia.org/wiki/Fizz_buzz" target="_blank" rel="nooppener noreferrer">fizzbuzz is quite big here in the UK</a>.<br />
+High chances it's big in the rest of the world too - it's meant to teach children about division.<br />
+I no longer qualify as a child but I do qualify as someone who has to prove their coding skills.</p>
+<blockquote><p>Write a program that prints the numbers from 1 to 100.<br />
+But for multiples of three print “Fizz” instead of the number and for the multiples of five print “Buzz”.<br />
+For numbers which are multiples of both three and five print “FizzBuzz”.</p></blockquote>
+<p>My first attempt was working but unsatisfactory. I googled to find whether there was a more elegant solution and - lo and behold - there was!<br />
+To save you the trouble, here it is in Ruby with a slight modification as I was also playing with arguments passed from the shell.</p>
+<pre lang="LANGUAGE" line="1">#assign an argument passed via shell/terminal/cli to n or by default 100
+n = ARGV[0] || 100
+#repeat up to nth time
+#what you choose via shell/terminal/cli or the default value of 100
+#i is a token/dummy value which represents each incremental iteration
+#you could call it diplodocus for all it matters
+(1..n).each{|i|
+#x is what we will print as a result, upon starting, it's blank!
+x = ''
+#assign string Fizz to x if i is a multiple of 3
+x += 'Fizz' if i%3==0
+x += 'Buzz' if i%5==0
+
+#if x is not a multiple of 5 or 3 and is thus empty at that point
+#just print the iteration instead ie. count
+#otherwise print what's been assigned to x(either Fizz or Buzz or FizzBuzz)
+puts(x.empty? ? i : x);
+}</pre>
+<p>This is not the ultimate solution - just the one that struck me by its simplicity.<br />
+I have added a lot of comments because my post is not necessarily aimed at an expert audience.<br />
+And frankly, I also appreciate when people try to be as clear as possible.<br />
+It really helps understanding.</p>
+<p>One of the principles of Ruby is <em>there's more than one way to do something</em>.<br />
+It is rich and challenging because the coder has the responsibility for finding out the best way in their given context.<br />
+This implies a good level of creativity and the ability to re-calibrate the way you think to look at the problem from different angles.</p>
+<p>The strange thing is I can sense whenever I am writing some cluttered code.<br />
+I know that from the moment I repeat some patterns, I feel like I have lost the game.<br />
+Looking back at my code snippets, I often have a sense of gratification widely outweighed by frustration. And such a desire to do more and better!</p>
+<p>This blog is one way to explore the reasons behind why I have decided at this point in life to become a full-time developer.<br />
+It's meant to be self-exploratory, possibly witty and most certainly silly at times.</p>
+
+        </div>
+
+    </article>
+</div>
+
+<footer class="site-footer">
+
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>/^1 pat{2}ern 2 hap{2}ines{2}.*/</li>
+          <li><a href="mailto:natseg@gmail.com">natseg@gmail.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/natseg"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">natseg</span></a>
+
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Get to know me a little bit better. Javascript using React and Typescript, Ruby using Rails, Elixir with Phoenix. Programming and learning in a broader sense.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+<script type="text/javascript" src="/default.entry.js" charset="utf-8"></script>
+</body>
+
+</html>

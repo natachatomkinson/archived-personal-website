@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Basic Unix on MacOS</title>
+  <meta name="description" content="Edit 2017-09-06:">
+
+  <link rel="stylesheet" href="/main.css"  type="text/css">
+  <link rel="icon" sizes="32x32" href="/assets/favicon.png">
+
+  <link rel="canonical" href="https://natachasegala.co.uk/reading-notes/basic-unix-on-mac-%D0%BEs/">
+  <link rel="alternate" type="application/rss+xml" title="/^1 pat{2}ern 2 hap{2}ines{2}.*/" href="https://natachasegala.co.uk/feed.xml">
+</head>
+
+<header>
+  <nav class="nav-header">
+    <button tabindex="0" type="button" class="nav-menu-button">
+      <svg viewBox="0 0 24 24" class="nav-menu-button-icon">
+        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z">
+        </path>
+      </svg>
+    </button>
+    <div class="nav-site-title">
+      <a class="unstyledLink xlHeader" href="/">
+        /^1 pat{2}ern 2 hap{2}ines{2}.*/
+      </a>
+    </div>
+
+    <div class="nav-about-container" >
+      <a href="/about" class="unstyledLink nav-header-icon">
+
+        <svg viewBox="0 0 24 24" class="nav-menu-button-icon nav-secondary-icon" >
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z">
+          </path>
+        </svg>
+      </a>
+    </div>
+  </nav>
+</header>
+
+
+<body>
+<div id="root"></div>
+
+<div class="page-content">
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+            <h1 class="post-title" itemprop="name headline">Basic Unix on MacOS</h1>
+            <p class="post-meta"><time datetime="2017-07-09T00:00:00+01:00" itemprop="datePublished">Jul 9, 2017</time></p>
+        </header>
+
+        <div class="post-content" itemprop="articleBody">
+            <p>Edit 2017-09-06:</p>
+
+<p>If I open my terminal and type:
+<code class="highlighter-rouge">$ alias</code></p>
+
+<p>This is roughly what I get (minus work-related ones):</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="nb">alias </span><span class="nv">addkeys</span><span class="o">=</span><span class="s1">'ssh-add ~/.ssh/pro_key &amp;&amp; ssh-add ~/.ssh/perso_key'</span>
+<span class="nb">alias cp</span><span class="o">=</span><span class="s1">'cp -i'</span>
+<span class="nb">alias ls</span><span class="o">=</span><span class="s1">'ls -aF'</span>
+<span class="nb">alias mv</span><span class="o">=</span><span class="s1">'mv -i'</span>
+<span class="nb">alias rm</span><span class="o">=</span><span class="s1">'rm -i'</span><span class="sb">`</span>
+<span class="nb">alias </span><span class="nv">resizePic</span><span class="o">=</span><span class="s1">'convert -resize 50%  '</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Additionally here is a summary of my notes of the book ‘Learning Unix for OS X’ by Dave Taylor.</p>
+
+<p>A directory is just another kind of file</p>
+
+<p>BASIC COMMANDS</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="code"><pre><span class="nv">$ </span>ps <span class="nt">-asx</span> <span class="o">(</span>to list all programs and processes <span class="k">for </span>all <span class="nb">users</span><span class="o">)</span>
+<span class="nv">$ </span>ps <span class="nt">-ax</span> | <span class="nb">grep</span> &lt;program&gt;
+<span class="nv">$ </span><span class="nb">cp</span> &lt;search1&gt; &lt;search2&gt; ~ <span class="o">(</span>copy<span class="o">)</span>
+<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-a</span> <span class="o">(</span>list all<span class="o">)</span>
+<span class="nv">$ </span>&lt;<span class="nb">command</span><span class="o">&gt;</span> <span class="nt">-options</span> &lt;filename<span class="o">(</span>s<span class="o">)&gt;</span>s
+<span class="nv">$ </span><span class="nb">pwd</span> - Print Working Directory
+<span class="nv">$ </span>man - Manual
+<span class="nv">$ </span>less - Long Text File
+<span class="nv">$ </span><span class="nb">grep</span> - pattern filename
+<span class="nv">$ </span><span class="nb">cp</span> - copy
+<span class="nv">$ </span><span class="nb">mv</span> - move
+<span class="nv">$ </span>top - Running Applications and Processes
+<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> - List files and directories
+<span class="nv">$ </span>open - open file or program with default application</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Exception in order of arguments</p>
+
+<p><code class="highlighter-rouge"> sort -o 'sortedfilename' -n 'sortmefilename'</code></p>
+
+<p>Paste escaped text by using ctrl + meta + V (only in Terminal)</p>
+
+<hr />
+
+<p>SHORTCUTS</p>
+
+<p>CTRL + U = Wholeline delete
+CTRL + S / CTRL + Q = pause/resume printing of a program executing</p>
+
+<hr />
+
+<p>ALIASING</p>
+
+<p>ls=/bin/ls -af
+rm= rm - i
+mv= mv -i
+cp= cp -i</p>
+
+<p>-i interactive adds prompt when deleting / overwriting</p>
+
+<p><code class="highlighter-rouge">$ alias -' get all aliases</code></p>
+
+<hr />
+
+<p>LIST INFORMATION</p>
+
+<p><code class="highlighter-rouge">$ ls</code></p>
+
+<p>-C sorted down
+-x sorted across
+-F (appends ‘/’ to directories)
+-d shows info about a directory and not its contents
+-l more info
+-a list all files (including hidden files)
+-R recursive</p>
+
+<hr />
+
+<p>PERMISSIONS</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">d             | rwx                             | r - x | <span class="nt">---</span></code></pre></figure>
+
+<table>
+  <tbody>
+    <tr>
+      <td>directory</td>
+      <td>Read Write eXecute</td>
+      <td>read nowrite execute</td>
+      <td>nothing allowed</td>
+    </tr>
+    <tr>
+      <td>owner’s permissions    group permissions</td>
+      <td>other users</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>-
+plain file  | …</p>
+
+<hr />
+
+<p>CHANGING</p>
+
+<p><code class="highlighter-rouge">$ chmod</code></p>
+
+<p>ie change mode</p>
+
+<p>o = others
+g = group
+u = current user
+a = all others</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="nv">$ </span><span class="nb">chmod </span>au <span class="nt">-w</span> removes write permission <span class="k">for </span>all others and current user
+<span class="nv">$ </span><span class="nb">chmod </span>au +w adds write permission <span class="k">for </span>all others and current user
+<span class="nv">$ </span><span class="nb">chmod </span><span class="nv">ug</span><span class="o">=</span>rw <span class="k">*</span> removes write permission <span class="k">for </span>user and group <span class="k">for </span>all files and directories <span class="k">in </span>current directory <span class="o">(</span>not recursive<span class="o">)</span> - check this one
+<span class="nv">$ </span><span class="nb">chmod </span><span class="nv">go</span><span class="o">=</span> removes all permissions <span class="k">for </span>group and others</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><code class="highlighter-rouge">$ chgrp</code></p>
+
+<p>ie change group</p>
+
+<p><code class="highlighter-rouge">$ chown</code></p>
+
+<p>ie change owner
+only available for sudo
+<code class="highlighter-rouge">$ sudo chown 'owner' 'targetowned'</code></p>
+
+<p>FIND</p>
+
+<p><code class="highlighter-rouge">$ sudo find | -name 'stufftolookfor' -print</code></p>
+
+<p>sudo to avoid read permission issues</p>
+
+<hr />
+
+<p>DISPLAY</p>
+
+<p><code class="highlighter-rouge">$ cat</code></p>
+
+<p>ie concatenate
+streams content of a file till its end
+hard to tell when a file begins and ends
+-n = numbers lines
+-v = makes all characters printable (not necessarily readable)</p>
+
+<p><code class="highlighter-rouge">$ less</code></p>
+
+<p>shows content of file screen by screen</p>
+
+<p><code class="highlighter-rouge">$ less *something.txt</code></p>
+
+<p>displays content of all files matching *something.txt BUT alphabetized (not necessarily in the order you’d wish)
+-M shows percentage for file position + filename
+-I case insensitive
+typing q = quits less view</p>
+
+<p>less is identical to more program (less offers more options)
+LESS=”M”; export LESS</p>
+
+<p>Without the dash to show percentage and filename by default
+/’wordtosearch’ = skips to next occurence of wordtosearch
+? ‘wordtosearch’ = skips to previous occurrence of wordtosearch</p>
+
+<hr />
+
+<p>MOVE</p>
+
+<p><code class="highlighter-rouge">$ mv *.{jpg|JPG} 'targetdir'</code>
+move in bulk with extension</p>
+
+<hr />
+
+<p>SIZING</p>
+
+<p><code class="highlighter-rouge">$ du 'directoryname'</code>
+-s = summarize
+ie
+<code class="highlighter-rouge">$ du -s *.[^.]</code></p>
+
+<p>separate totals for directories and files ignoring current and parent directories
+-r = recursive
+-h = human readable (in kilobytes, megabytes and gigabytes rather than just in the default kilobytes)</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="nv">$ </span><span class="nb">du</span> <span class="nt">-s</span> /Library/<span class="k">*</span> | <span class="nb">sort</span> <span class="nt">-n</span>
+<span class="nv">$ </span><span class="nb">du</span> <span class="nt">-s</span> /Library/<span class="k">*</span> | <span class="nb">sort</span> <span class="nt">-rn</span> | <span class="nb">head</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Will list separate 10 biggest files/directories inside Library (sort by numeric values recursively)</p>
+
+<p>DISK FREE SPACE
+<code class="highlighter-rouge">$ df</code></p>
+
+<p>-h human readable - precise
+-H more human readable -slighly less precise</p>
+
+<hr />
+
+<p>INODES
+Block of data chained together</p>
+
+<p>=’ You can have available space on your disk but if you have a great number of files and run out of inodes this will be unusable</p>
+
+<hr />
+<p>Applescript:
+osascript -e | somecommand</p>
+
+<p>Applications/Utilities/Script Editor</p>
+
+<hr />
+
+<p>LOGIN SHELL
+chsh</p>
+
+<hr />
+
+<p>VI(M)</p>
+
+<hr />
+
+<p>Mac to Unix</p>
+
+<p><code class="highlighter-rouge">$ m2u macfile unixfile</code></p>
+
+<p>Unix to Mac</p>
+
+<p><code class="highlighter-rouge">$u2m unixfile macfile</code></p>
+
+<p>for fixing returns</p>
+
+<hr />
+
+
+        </div>
+
+    </article>
+</div>
+
+<footer class="site-footer">
+
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>/^1 pat{2}ern 2 hap{2}ines{2}.*/</li>
+          <li><a href="mailto:natseg@gmail.com">natseg@gmail.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/natseg"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">natseg</span></a>
+
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Get to know me a little bit better. Javascript using React and Typescript, Ruby using Rails, Elixir with Phoenix. Programming and learning in a broader sense.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+<script type="text/javascript" src="/default.entry.js" charset="utf-8"></script>
+</body>
+
+</html>

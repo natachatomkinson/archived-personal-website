@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>A Macroscopic Take on Metaprogramming</title>
+  <meta name="description" content="Disclaimer: First published on the ForwardFinancing tech blog here.">
+
+  <link rel="stylesheet" href="/main.css"  type="text/css">
+  <link rel="icon" sizes="32x32" href="/assets/favicon.png">
+
+  <link rel="canonical" href="https://natachasegala.co.uk/bitsbobsofcodes/macroscopic-take-on-metaprogramming/">
+  <link rel="alternate" type="application/rss+xml" title="/^1 pat{2}ern 2 hap{2}ines{2}.*/" href="https://natachasegala.co.uk/feed.xml">
+</head>
+
+<header>
+  <nav class="nav-header">
+    <button tabindex="0" type="button" class="nav-menu-button">
+      <svg viewBox="0 0 24 24" class="nav-menu-button-icon">
+        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z">
+        </path>
+      </svg>
+    </button>
+    <div class="nav-site-title">
+      <a class="unstyledLink xlHeader" href="/">
+        /^1 pat{2}ern 2 hap{2}ines{2}.*/
+      </a>
+    </div>
+
+    <div class="nav-about-container" >
+      <a href="/about" class="unstyledLink nav-header-icon">
+
+        <svg viewBox="0 0 24 24" class="nav-menu-button-icon nav-secondary-icon" >
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z">
+          </path>
+        </svg>
+      </a>
+    </div>
+  </nav>
+</header>
+
+
+<body>
+<div id="root"></div>
+
+<div class="page-content">
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+            <h1 class="post-title" itemprop="name headline">A Macroscopic Take on Metaprogramming</h1>
+            <p class="post-meta"><time datetime="2017-07-09T00:00:00+01:00" itemprop="datePublished">Jul 9, 2017</time></p>
+        </header>
+
+        <div class="post-content" itemprop="articleBody">
+            <p><em>Disclaimer: First published on the ForwardFinancing tech blog <a href="http://tech.forwardfinancing.com/elixir/ruby/javascript/2018/10/05/a-macroscopic-take-on-metaprogramming.html">here</a>.</em></p>
+
+<p>If you are as keen on DIY as I am and equally as helpless, the first time you’re presented with some sort of power tool you may think, “This is scary — how could I possibly use this?”.</p>
+
+<p>In some respects, metaprogramming can feel just like this.</p>
+
+<p>If we take a look at Wikipedia’s definition: “Metaprogramming is a programming technique in which computer programs have the ability to treat programs as their data.”</p>
+
+<p>Another common definition is “writing code that writes code.”</p>
+
+<p>User data is one of the main unknowns in coding. Everyday code does not necessarily solve unique problems. As developers, we use well-defined conventions and set of functions we are familiar with to process this data and return whatever is defined in the product specifications.</p>
+
+<p>There should be room for abstraction and generalization and yet, the consensus is to try and avoid metaprogramming as much as possible — especially as it can sometimes compromise readability.</p>
+
+<p>The prefix “meta” is self-referential which tends to indicate linguistically that metaprogramming encompasses all of programming including “normal” programming. We could think of “normal” programming as our ability to solve unique problems. All of the other kinds of general problems could — in theory — be handled by metaprogramming.</p>
+
+<p>Getting to know the reflective methods and tools every language we use is a way of refining one’s craft. It also offers a glimpse into and a better understanding of the internals of the language.</p>
+
+<p>Ruby
+When working with Ruby, chances are you will come across the DRY, don’t repeat yourself, paradigm.</p>
+
+<p>The idea of avoiding duplication seems like a sound one in a more general context too. It will make any refactoring or change easier.</p>
+
+<p>Not a cure-all but definitely a tool to keep handy in one’s dev belt.</p>
+
+<p>Example
+We have a test suite responsible for checking that the index page of our website includes the content we expect:</p>
+
+<p>class IndexTest &lt; TestCase
+  test_homepage_has_about_content do
+    visit ‘/’
+    assert page.has_content?(about)
+  end</p>
+
+<p>test_homepage_has_news_content do
+    visit ‘/’
+    assert page.has_content?(news)
+  end</p>
+
+<p>…
+end
+A quick online search or pairing could reduce the code to:</p>
+
+<p>class IndexTest &lt; TestCase
+  HOMEPAGE_CONTENT = [‘About’, ‘Meetups’, ‘Tweets’, ‘News’].freeze</p>
+
+<p>HOMEPAGE_CONTENT.each do |content|
+    define_method(“test_homepage_has_#{content}_content”) do
+      visit ‘/’
+      assert page.has_content?(content)
+    end
+  end
+end
+What does define_method do exactly and where does it come from?</p>
+
+<p>Running IndexTest.methods returns a lot of methods we have not defined ourselves. This is where the concept of inheritance starts to be visible.</p>
+
+<p>This call returns a list that includes all of the methods accessible in the object’s ancestors.</p>
+
+<p>If we want to know how many ancestors the IndexTest class has, we can run:</p>
+
+<p>IndexTest.ancestors
+=&gt; [IndexTest, Object, Kernel, BasicObject]
+If you check each ancestor individually, define_method or even ancestors are nowhere to be found.</p>
+
+<p>This is because inheritance is not limited to direct “vertical” precedence. BasicObject, Object, and IndexText are all classes and they have Class as their class. All of them are instances of Class. Class ancestors are:</p>
+
+<p>Class.ancestors
+=&gt; [Class, Module, Object, Kernel, BasicObject]
+Module is where define_methods and ancestors are defined.</p>
+
+<p>define_method allows us to pass an argument and dynamically constructs a method based on the latter. The do keyword gives away the fact that — unlike def — the body of the method is a block.</p>
+
+<p>This means that define_method creates a closure which is both convenient and potentially cumbersome. If its scope includes large objects, we may want to avoid it altogether. It all depends whether we need to make use of the surrounding environment.</p>
+
+<p>Understanding inheritance in Ruby is key to using the language better.</p>
+
+<p>A lot of Ruby’s so-called “magic” exists in fact due to metaprogramming.</p>
+
+<p>JavaScript
+ES6 has introduced a new feature called Proxy – which lo and behold – is an application of the proxy pattern</p>
+
+<p>In short, it acts as an interface to either just forward to the original recipient or apply additional logic.</p>
+
+<p>Example
+We’re writing a library to use with our frontend applications. It will offer functions to report a set of events to a couple of external APIs. These APIs are in turn responsible for dispatching these to our internal messaging systems.</p>
+
+<p>We have an object responsible for dispatching the event to the first external API.</p>
+
+<p>import externalApi from ‘external-api’;
+let isInitialized;</p>
+
+<p>const FirstExternalApi = {
+  _getDispatcher: () =&gt; {
+  return (method, …args) =&gt; {
+  return externalApi.push([ method, …args]);
+};
+},</p>
+
+<p>dispatch: function(event) {
+  if (isInitialized) {
+    const { dispatchMethodName } = event;</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>this[dispatchMethodName](event);   } },
+</code></pre></div></div>
+
+<p>_dispatchEvent: function({ method, eventAttributes={ } }) {
+  this._getDispatcher()(method, eventAttributes);
+},</p>
+
+<p>_dispatchException: function({eventAttributes}) {
+  this._dispatchEvent({ method: ‘SHOUT’, eventAttributes });
+},</p>
+
+<p>[…]
+}
+In a development or staging environment, we want to be able to view the output of _getDispatcher in real time. We think it would avoid context switching and help speed up things a bit.</p>
+
+<p>We implement a mock object to output the event to the console. We deep clone the FirstExternalApi object and set the _getDispatcher to output to the console.</p>
+
+<p>function clone() {
+ // deep clone logic
+}</p>
+
+<p>const FirstExternalApiMock = clone(FirstExternalApi);</p>
+
+<p>FirstExternalApiMock._getDispatcher = function() {
+  return (method, …args) =&gt; {
+    const argsString = args.map(arg =&gt; {
+      return JSON.stringify(arg, null, 4);
+  }).join(‘, ‘);</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>console.log(`externalApi('${method}', ${argsString})`);   }; }; Based on the node environment, we have an object responsible for trickling our events down to:
+</code></pre></div></div>
+
+<p>either the real FirstExternalApi object responsible for communicating with the external API
+or the mock object
+Another way to look at this problem would be to wonder if we could hijack this _getDispatcher function and mock it directly at the “source”.</p>
+
+<p>ES6 proxies allow just that. They offer a way to catch just what you need of the behavior or add to it.</p>
+
+<p>So in our example, we replace the mock with the following:</p>
+
+<p>const FirstExternalApiMock = new Proxy(FirstExternalApi, {
+  get(target, propKey) {
+    if (propKey === ‘_getDispatcher’) {
+      return () =&gt; {
+        return (method, …args)=&gt; {
+          const argsString = args.map(arg =&gt; {
+            return JSON.stringify(arg, null, 4);
+        }).join(‘, ‘);</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      console.log(`externalApi: ('${argsString}')`);
+    }
+  };
+} else {
+  return target[propKey];
+}   } }); We pass the object we are interested in. “get” is responsible for “listening” to whenever a property of this object is called. Now we leave all properties but one alone and focus entirely on “trapping” _getDispatcher. When it’s called, we output the arguments to the console.
+</code></pre></div></div>
+
+<p>It’s a different, slightly more concise more way of implementing our solution.</p>
+
+<p>Elixir
+In Elixir, most of the metaprogramming boils down to understanding the functions quote and unquote (by no means a measure of simplicity). quote effectively gives us access to Elixir’s AST (abstract syntax tree) by showing us how an expression is parsed and transformed into a tree that Elixir can handle. What is returned typically contains three-element tuples (operation/data type, metadata, arguments/data).</p>
+
+<p>Example
+Again, we would like to make our test suite a bit more concise. Our application offers two endpoints with a very similar set of functionality. This should be a good case for abstracting most of their testing and sharing the tests between the two endpoints (endpoint_a and endpoint_b). Not dissimilar to RSpec shared example feature, making use of a domain specific language would work for our purposes.</p>
+
+<p>We have a series of tests like the one below:</p>
+
+<p>defmodule Api.V1.AControllerTest do
+	test “#create http returns a 403 status with json error” do
+	  “/v1/endpoint_a”
+	  |&gt; create_record(403, ssl_error())
+	end
+end</p>
+
+<p>defmodule Api.V1.BControllerTest do
+	test “#create http returns a 403 status with json error” do
+	  “/v1/endpoint_b”
+	  |&gt; create_record(403, ssl_error())
+	end
+end</p>
+
+<p>The only difference being the endpoint, we can abstract this to:</p>
+
+<p>defmodule SharedTestCase do
+  use ExUnit.Case</p>
+
+<p>@moduletag endpoint: “endpoint_a”</p>
+
+<p>test “#create http returns a 403 status with json error” do
+  		“/v1/#{endpoint}”
+  		|&gt; create_record(403, ssl_error())
+	end
+end
+@moduletag is a module attribute provided by ExUnit: one of its uses being to act as a temporary module storage to be used during compilation.</p>
+
+<p>A macro is going to help Api.V1.AControllerTest and Api.V1.BControllerTest modules make use of the SharedTestCase module.</p>
+
+<p>defmodule SharedTestCase do
+  defmacro <strong>using</strong>(options) do
+    quote do
+      use ExUnit.Case</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  @moduletag unquote(options)
+
+  test "#create http returns a 403 status with json error", %{endpoint: endpoint} do
+    "/v1/#{endpoint}"
+    |&gt; create_record(403, ssl_error())
+  end
+
+  ...
+end   end end It’s possible to go even further by extracting all the tests to another macro to define the tests separately.
+</code></pre></div></div>
+
+<p>Metaprogramming is not a bag of tricks, it’s the path to a deeper understanding of any language and potentially more expressive code.</p>
+
+<p>Languages like Elixir give the ability to the programmer of making extensions tailored to their needs which are first-class features.</p>
+
+<p>It’s too good an opportunity to pass up and not use for the greater good of generalization, DRY-ing your codebase and making the code more expressive.</p>
+
+<p>If this seems daunting at first, chances are you’re like me. This means one can start from a long redundant looking piece of code they have just written, feel an urge to make it better, and little by little, abstract away as much as possible.</p>
+
+<p>If this doesn’t seem daunting, it should simply lead to think more and code less.</p>
+
+        </div>
+
+    </article>
+</div>
+
+<footer class="site-footer">
+
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>/^1 pat{2}ern 2 hap{2}ines{2}.*/</li>
+          <li><a href="mailto:natseg@gmail.com">natseg@gmail.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/natseg"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">natseg</span></a>
+
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Get to know me a little bit better. Javascript using React and Typescript, Ruby using Rails, Elixir with Phoenix. Programming and learning in a broader sense.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+<script type="text/javascript" src="/default.entry.js" charset="utf-8"></script>
+</body>
+
+</html>

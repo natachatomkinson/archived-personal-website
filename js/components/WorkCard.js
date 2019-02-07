@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
-import Chip from 'material-ui/Chip';
 
 import MaterialUITheme from './styles/MaterialUITheme';
-import style from './WorkCard.less';
 
 class WorkCard extends Component {
 
@@ -21,35 +19,23 @@ class WorkCard extends Component {
         <CardMedia
           expandable
           overlay={
-            <CardTitle title="Blank slate JS VR Game" subtitle="Hang on to your cardboard " />
+            <CardTitle title="Ruby Under a Microscope" subtitle="An Illustrated Guide to Ruby Internals" />
           }
         >
-          <img src='/assets/blank_slate.jpeg' alt="Blank Slate Game" />
+          <img src='/assets/ruby_under_microscope.jpg' alt="Ruby book cover" />
         </CardMedia>
 
         <CardTitle titleStyle={{ height: '76px' }} title="Programming obsession" />
 
         <CardText expandable  >
           <p>
-            A mini-game designed for Google Cardboard
+            A book that dissects Ruby from the top down
           </p>
-
-          <div className={ style.chipContainer }>
-            <Chip>
-              aframe-vr
-            </Chip>
-            <Chip>
-              aframe-react
-            </Chip>
-            <Chip >
-              react
-            </Chip>
-          </div>
         </CardText>
 
         <CardActions>
-          <a href='https://natseg.github.io/blank-slate/' target="_blank" rel="no-openner no-referrer">
-            <FlatButton label="Play" />
+          <a href='http://patshaughnessy.net/ruby-under-a-microscope' target="_blank" rel="no-openner no-referrer">
+            <FlatButton label="Check it out" />
           </a>
         </CardActions>
       </Card>

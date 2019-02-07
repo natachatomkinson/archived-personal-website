@@ -21,16 +21,16 @@ class IntroductionCard extends Component {
        <CardMedia
          expandable
          overlay={
-           <CardTitle title="The Complete Elixir and Phoenix Bootcamp" subtitle="|>" />
+           <CardTitle title="PluralSight and Udemy GraphQL courses" subtitle="" />
          }
        >
          <div className={ style.backgroundImage } style={{ backgroundImage: 'url(\'/assets/udemy_logo.svg\')'}} />
        </CardMedia>
 
-       <CardTitle titleStyle={{ height: '76px' }}  title="Learning session" />
+       <CardTitle titleStyle={{ height: '76px' }}  title="" />
 
        <CardActions>
-         <a href='https://www.udemy.com/the-complete-elixir-and-phoenix-bootcamp-and-tutorial' target="_blank" rel="noopener noreferrer">
+         <a href='https://www.udemy.com/graphql-bootcamp/' target="_blank" rel="noopener noreferrer">
            <FlatButton label="Go to Udemy" />
          </a>
        </CardActions>

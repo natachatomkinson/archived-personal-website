@@ -37,16 +37,18 @@ The prefix “meta” is self-referential which tends to indicate linguistically
 
 Getting to know the reflective methods and tools every language we use is a way of refining one’s craft. It also offers a glimpse into and a better understanding of the internals of the language.
 
-Ruby
-When working with Ruby, chances are you will come across the DRY, don’t repeat yourself, paradigm.
+## Ruby
+When working with Ruby, chances are you will come across the `DRY`, don’t repeat yourself, paradigm.
 
 The idea of avoiding duplication seems like a sound one in a more general context too. It will make any refactoring or change easier.
 
 Not a cure-all but definitely a tool to keep handy in one’s dev belt.
 
 Example
+
 We have a test suite responsible for checking that the index page of our website includes the content we expect:
 
+```
 class IndexTest < TestCase
   test_homepage_has_about_content do
     visit '/'
@@ -60,8 +62,11 @@ class IndexTest < TestCase
 
   ...
 end
+```
+
 A quick online search or pairing could reduce the code to:
 
+```
 class IndexTest < TestCase
   HOMEPAGE_CONTENT = ['About', 'Meetups', 'Tweets', 'News'].freeze
 
@@ -72,34 +77,46 @@ class IndexTest < TestCase
     end
   end
 end
-What does define_method do exactly and where does it come from?
+```
 
-Running IndexTest.methods returns a lot of methods we have not defined ourselves. This is where the concept of inheritance starts to be visible.
+What does `define_method` do exactly and where does it come from?
+
+Running IndexTest.methods returns a lot of methods we have not defined ourselves. 
+
+This is where the concept of inheritance starts to be visible.
 
 This call returns a list that includes all of the methods accessible in the object’s ancestors.
 
 If we want to know how many ancestors the IndexTest class has, we can run:
 
+```
 IndexTest.ancestors
 => [IndexTest, Object, Kernel, BasicObject]
+```
+
 If you check each ancestor individually, define_method or even ancestors are nowhere to be found.
 
 This is because inheritance is not limited to direct “vertical” precedence. BasicObject, Object, and IndexText are all classes and they have Class as their class. All of them are instances of Class. Class ancestors are:
 
+```
 Class.ancestors
 => [Class, Module, Object, Kernel, BasicObject]
-Module is where define_methods and ancestors are defined.
+```
 
-define_method allows us to pass an argument and dynamically constructs a method based on the latter. The do keyword gives away the fact that — unlike def — the body of the method is a block.
+Module is where `define_methods` and ancestors are defined.
 
-This means that define_method creates a closure which is both convenient and potentially cumbersome. If its scope includes large objects, we may want to avoid it altogether. It all depends whether we need to make use of the surrounding environment.
+`define_method` allows us to pass an argument and dynamically constructs a method based on the latter. The `do` keyword gives away the fact that — unlike `def` — the body of the method is a block.
+
+This means that define_method creates a closure which is both convenient and potentially cumbersome. 
+If its scope includes large objects, we may want to avoid it altogether.
+It all depends whether we need to make use of the surrounding environment.
 
 Understanding inheritance in Ruby is key to using the language better.
 
 A lot of Ruby’s so-called “magic” exists in fact due to metaprogramming.
 
-JavaScript
-ES6 has introduced a new feature called Proxy – which lo and behold – is an application of the proxy pattern
+## JavaScript
+ES6 has introduced a new feature called `Proxy` – which lo and behold – is an application of the proxy pattern.
 
 In short, it acts as an interface to either just forward to the original recipient or apply additional logic.
 
@@ -108,63 +125,74 @@ We’re writing a library to use with our frontend applications. It will offer f
 
 We have an object responsible for dispatching the event to the first external API.
 
-import externalApi from 'external-api';
-let isInitialized;
+```
+ import externalApi from 'external-api';
+ let isInitialized;
+ 
+ const FirstExternalApi = {
+   _getDispatcher: () => {
+   return (method, ...args) => {
+   return externalApi.push([ method, ...args]);
+ };
+ },
+ 
+ dispatch: function(event) {
+   if (isInitialized) {
+     const { dispatchMethodName } = event;
+ 
+     this[dispatchMethodName](event);
+   }
+ },
+ 
+ _dispatchEvent: function({ method, eventAttributes={ } }) {
+   this._getDispatcher()(method, eventAttributes);
+ },
+ 
+ _dispatchException: function({eventAttributes}) {
+   this._dispatchEvent({ method: 'SHOUT', eventAttributes });
+ },
+ 
+ [...]
+ }
+```
 
-const FirstExternalApi = {
-  _getDispatcher: () => {
-  return (method, ...args) => {
-  return externalApi.push([ method, ...args]);
-};
-},
+In a development or staging environment, we want to be able to view the output of `_getDispatcher` in real time. 
 
-dispatch: function(event) {
-  if (isInitialized) {
-    const { dispatchMethodName } = event;
+We think it would avoid context switching and help speed up things a bit.
 
-    this[dispatchMethodName](event);
-  }
-},
+We implement a mock object to output the event to the console. 
+We deep clone the FirstExternalApi object and set the _getDispatcher to output to the console.
 
-_dispatchEvent: function({ method, eventAttributes={ } }) {
-  this._getDispatcher()(method, eventAttributes);
-},
+```
+   function clone() {
+    // deep clone logic
+   }
+   
+   const FirstExternalApiMock = clone(FirstExternalApi);
+   
+   FirstExternalApiMock._getDispatcher = function() {
+     return (method, ...args) => {
+       const argsString = args.map(arg => {
+         return JSON.stringify(arg, null, 4);
+     }).join(', ');
+   
+       console.log(`externalApi('${method}', ${argsString})`);
+     };
+   };
+```
 
-_dispatchException: function({eventAttributes}) {
-  this._dispatchEvent({ method: 'SHOUT', eventAttributes });
-},
-
-[...]
-}
-In a development or staging environment, we want to be able to view the output of _getDispatcher in real time. We think it would avoid context switching and help speed up things a bit.
-
-We implement a mock object to output the event to the console. We deep clone the FirstExternalApi object and set the _getDispatcher to output to the console.
-
-function clone() {
- // deep clone logic
-}
-
-const FirstExternalApiMock = clone(FirstExternalApi);
-
-FirstExternalApiMock._getDispatcher = function() {
-  return (method, ...args) => {
-    const argsString = args.map(arg => {
-      return JSON.stringify(arg, null, 4);
-  }).join(', ');
-
-    console.log(`externalApi('${method}', ${argsString})`);
-  };
-};
 Based on the node environment, we have an object responsible for trickling our events down to:
 
-either the real FirstExternalApi object responsible for communicating with the external API
-or the mock object
-Another way to look at this problem would be to wonder if we could hijack this _getDispatcher function and mock it directly at the “source”.
+* either the real FirstExternalApi object responsible for communicating with the external API
+* or the mock object
+
+Another way to look at this problem would be to wonder if we could hijack this `_getDispatcher` function and mock it directly at the “source”.
 
 ES6 proxies allow just that. They offer a way to catch just what you need of the behavior or add to it.
 
 So in our example, we replace the mock with the following:
 
+```
 const FirstExternalApiMock = new Proxy(FirstExternalApi, {
   get(target, propKey) {
     if (propKey === '_getDispatcher') {
@@ -182,18 +210,22 @@ const FirstExternalApiMock = new Proxy(FirstExternalApi, {
     }
   }
 });
+```
+
 We pass the object we are interested in. “get” is responsible for “listening” to whenever a property of this object is called. Now we leave all properties but one alone and focus entirely on “trapping” _getDispatcher. When it’s called, we output the arguments to the console.
 
 It’s a different, slightly more concise more way of implementing our solution.
 
-Elixir
-In Elixir, most of the metaprogramming boils down to understanding the functions quote and unquote (by no means a measure of simplicity). quote effectively gives us access to Elixir’s AST (abstract syntax tree) by showing us how an expression is parsed and transformed into a tree that Elixir can handle. What is returned typically contains three-element tuples (operation/data type, metadata, arguments/data).
+## Elixir
+
+In Elixir, most of the metaprogramming boils down to understanding the functions `quote` and `unquote` (by no means a measure of simplicity). quote effectively gives us access to Elixir’s AST (abstract syntax tree) by showing us how an expression is parsed and transformed into a tree that Elixir can handle. What is returned typically contains three-element tuples (operation/data type, metadata, arguments/data).
 
 Example
 Again, we would like to make our test suite a bit more concise. Our application offers two endpoints with a very similar set of functionality. This should be a good case for abstracting most of their testing and sharing the tests between the two endpoints (endpoint_a and endpoint_b). Not dissimilar to RSpec shared example feature, making use of a domain specific language would work for our purposes.
 
 We have a series of tests like the one below:
 
+```
 defmodule Api.V1.AControllerTest do
 	test "#create http returns a 403 status with json error" do
 	  "/v1/endpoint_a"
@@ -207,23 +239,28 @@ defmodule Api.V1.BControllerTest do
 	  |> create_record(403, ssl_error())
 	end
 end
+```
 
 The only difference being the endpoint, we can abstract this to:
 
-defmodule SharedTestCase do
-  use ExUnit.Case
+```
+ defmodule SharedTestCase do
+   use ExUnit.Case
+ 
+   @moduletag endpoint: "endpoint_a"
+ 
+   test "#create http returns a 403 status with json error" do
+   		"/v1/#{endpoint}"
+   		|> create_record(403, ssl_error())
+ 	end
+ end
+```
 
-  @moduletag endpoint: "endpoint_a"
+`@moduletag` is a module attribute provided by `ExUnit`: one of its uses being to act as a temporary module storage to be used during compilation.
 
-  test "#create http returns a 403 status with json error" do
-  		"/v1/#{endpoint}"
-  		|> create_record(403, ssl_error())
-	end
-end
-@moduletag is a module attribute provided by ExUnit: one of its uses being to act as a temporary module storage to be used during compilation.
+A macro is going to help `Api.V1.AControllerTest` and `Api.V1.BControllerTest` modules make use of the `SharedTestCase` module.
 
-A macro is going to help Api.V1.AControllerTest and Api.V1.BControllerTest modules make use of the SharedTestCase module.
-
+```
 defmodule SharedTestCase do
   defmacro __using__(options) do
     quote do
@@ -240,7 +277,10 @@ defmodule SharedTestCase do
     end
   end
 end
+```
+
 It’s possible to go even further by extracting all the tests to another macro to define the tests separately.
+
 
 Metaprogramming is not a bag of tricks, it’s the path to a deeper understanding of any language and potentially more expressive code.
 

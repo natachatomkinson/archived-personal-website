@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>How to make your life easier when developing a front-end library</title>
+  <meta name="description" content="Also published on dev.toLet’s say you have a good use case to develop a front-end library.">
+
+  <link rel="stylesheet" href="/main.css"  type="text/css">
+  <link rel="icon" sizes="32x32" href="/assets/favicon.png">
+
+  <link rel="canonical" href="https://natachasegala.co.uk/bitsbobsofcodes/developing-a-front-end-library/">
+  <link rel="alternate" type="application/rss+xml" title="/^1 pat{2}ern 2 hap{2}ines{2}.*/" href="https://natachasegala.co.uk/feed.xml">
+</head>
+
+<header>
+  <nav class="nav-header">
+    <button tabindex="0" type="button" class="nav-menu-button">
+      <svg viewBox="0 0 24 24" class="nav-menu-button-icon">
+        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z">
+        </path>
+      </svg>
+    </button>
+    <div class="nav-site-title">
+      <a class="unstyledLink xlHeader" href="/">
+        /^1 pat{2}ern 2 hap{2}ines{2}.*/
+      </a>
+    </div>
+
+    <div class="nav-about-container" >
+      <a href="/about" class="unstyledLink nav-header-icon">
+
+        <svg viewBox="0 0 24 24" class="nav-menu-button-icon nav-secondary-icon" >
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z">
+          </path>
+        </svg>
+      </a>
+    </div>
+  </nav>
+</header>
+
+
+<body>
+<div id="root"></div>
+
+<div class="page-content">
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <header class="post-header">
+            <h1 class="post-title" itemprop="name headline">How to make your life easier when developing a front-end library</h1>
+            <p class="post-meta"><time datetime="2019-01-15T00:00:00+00:00" itemprop="datePublished">Jan 15, 2019</time></p>
+        </header>
+
+        <div class="post-content" itemprop="articleBody">
+            <p>Also published on <a href="https://dev.to/natseg/how-to-make-your-life-easier-when-developing-a-front-end-library--4pjk">dev.to</a></p>
+
+<p>Let’s say you have a good use case to develop a front-end library.</p>
+
+<p>It could be that:</p>
+<ul>
+  <li>you’re re-using a lot of similar components in different apps</li>
+  <li>you want to decouple your apps from an external api</li>
+  <li>you want to play around with javascript for the fun of it</li>
+  <li>…</li>
+</ul>
+
+<ol>
+  <li>You set up your repository with git using the provider you prefer (github, gitlab, …)</li>
+  <li>You can choose to use a boilerplate for the framework you wish to use (Typescript, React, both, …)</li>
+  <li>Once you have done this, you realize that in order to integrate with your app:
+    <ul>
+      <li>you need to run a build depending on the bundling manager you use (rollup, webpack, …)</li>
+      <li>you need to tell your app where to find the package being developed</li>
+    </ul>
+  </li>
+  <li>
+    <p>At this point, I would advise using <code class="highlighter-rouge">link</code>, a command which exists both for  <a href="https://yarnpkg.com/lang/en/docs/cli/link/" target="_blank" rel="noopener noreferrer"> yarn</a> and <a href="https://docs.npmjs.com/cli/link.html" target="_blank" rel="noopener noreferrer">npm</a>.
+This creates a symbolic link between your app and the library you’re working on.</p>
+  </li>
+  <li>To avoid having to “manually” rebuild after each code change in the library, use your bundler cli with the  <a href="https://webpack.js.org/api/cli/#watch-options"><code class="highlighter-rouge">watch</code></a> flag to watch the files recursively</li>
+  <li>Choose a test framework and you’re ready to go!</li>
+</ol>
+
+<p>Gotchas:</p>
+<ul>
+  <li>running <code class="highlighter-rouge">install</code> at any point after this will overwrite the link.</li>
+  <li>be mindful of what locks the version in your <code class="highlighter-rouge">package.json</code> in doubt, you could switch from <code class="highlighter-rouge">caret</code> to <code class="highlighter-rouge">tilde</code> or lock onto exact versions (with <a href="https://docs.npmjs.com/cli/install">the –save-exact flag</a>)</li>
+</ul>
+
+<p><strong>CODE, SWEAT, SWEAR AND TEST</strong></p>
+
+<p>Before deploying and publishing a package that needs code-review and QA:</p>
+<ol>
+  <li>Build the latest version of your code</li>
+  <li>Use <a href="https://docs.npmjs.com/cli/pack.html"><code class="highlighter-rouge">npm pack</code></a> in the repository of your library</li>
+  <li>
+    <p>This creates a tarball file you can move to the repository of the app you want QA to test it with.
+Run <code class="highlighter-rouge">mv nameoftarball ../wherever/your_app/lives</code>
+Then <code class="highlighter-rouge">cd ../wherever/your_app/lives &amp;&amp; npm i nameoftarball</code></p>
+  </li>
+  <li>Commit, push, deploy to a staging/test environment</li>
+  <li>When you get the all clear, whatever you deploy will be spot-on!</li>
+</ol>
+
+        </div>
+
+    </article>
+</div>
+
+<footer class="site-footer">
+
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>/^1 pat{2}ern 2 hap{2}ines{2}.*/</li>
+          <li><a href="mailto:natseg@gmail.com">natseg@gmail.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/natseg"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">natseg</span></a>
+
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Get to know me a little bit better. Javascript using React and Typescript, Ruby using Rails, Elixir with Phoenix. Programming and learning in a broader sense.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+<script type="text/javascript" src="/default.entry.js" charset="utf-8"></script>
+</body>
+
+</html>

@@ -1,11 +1,11 @@
 {
   "name": "natseg",
   "version": "1.0.0",
-  "description": "Natacha Segala's personal website",
+  "description": "Natacha Tomkinson's personal website",
   "main": "index.js",
-  "homepage": "https://natachasegala.co.uk",
+  "homepage": "https://natachatomkinson.co.uk",
   "repository": "https://github.com/natseg/natseg",
-  "author": "Natacha Ségala",
+  "author": "Natacha Tomkinson",
   "license": "MIT",
   "scripts": {
     "serve": "bundle exec jekyll serve",
@@ -38,6 +38,6 @@
     "@babel/preset-env": "7.3.1",
     "@babel/preset-react": "7.0.0",
     "babel-loader": "8.0.5",
-    "webpack-cli": "^3.2.1"
+    "webpack-cli": "^3.3.2"
   }
 }
